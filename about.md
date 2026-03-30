@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: about
 title: About
 ---
 
@@ -32,27 +32,6 @@ Blog nay la noi minh chia se:
 | Malware | YARA, Cuckoo, Any.Run |
 | Endpoint | Velociraptor, OSQuery |
 | Framework | MITRE ATT&CK, Cyber Kill Chain |
-
-## Certifications
-
-{% if site.certifications and site.certifications.size > 0 %}
-<div class="cert-grid">
-  {% for cert in site.certifications %}
-    <a class="cert-card" href="{{ cert.url }}" target="_blank" rel="noreferrer">
-      <span class="cert-issuer">{{ cert.issuer }}</span>
-      <strong class="cert-name">{{ cert.name }}</strong>
-      {% if cert.issued %}
-        <span class="cert-meta">Issued: {{ cert.issued }}</span>
-      {% endif %}
-      {% if cert.note %}
-        <span class="cert-meta">{{ cert.note }}</span>
-      {% endif %}
-    </a>
-  {% endfor %}
-</div>
-{% else %}
-Chua co certification nao duoc them. Ban co the cap nhat danh sach trong `_config.yml` bang ten cert va link Credly.
-{% endif %}
 
 ## Contact
 

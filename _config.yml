@@ -7,17 +7,14 @@ baseurl: ""
 author:
   name: "ruouchuoihot"
   bio: "CTF Player | Security Researcher"
+  role: "Blue Team enthusiast, SOC Analyst, and defensive CTF writeup author"
   github: "ruouchuoihot"
 
-# Certifications
-# Add your certifications here. Example:
-# certifications:
-#   - name: "CompTIA Security+"
-#     issuer: "CompTIA"
-#     issued: "2026"
-#     note: "Badge on Credly"
-#     url: "https://www.credly.com/badges/your-badge-id"
-certifications: []
+# Credly profile
+# Update only this public profile URL. Manage badges directly on Credly.
+credly:
+  handle: ""
+  profile_url: ""
 
 # Build settings
 markdown: kramdown
