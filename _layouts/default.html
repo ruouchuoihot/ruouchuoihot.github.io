@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
@@ -21,62 +21,85 @@
           <li><a href="{{ '/about' | relative_url }}">About</a></li>
         </ul>
       </nav>
-      <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+      <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')" aria-label="Toggle navigation">
+        &#9776;
+      </button>
     </div>
   </header>
 
   <div class="layout-wrapper">
     <aside class="sidebar">
-      <div class="sidebar-section">
-        <h3 class="sidebar-title">📂 Categories</h3>
-        <ul class="sidebar-list">
-          <li><a href="{{ '/' | relative_url }}">🏠 Home</a></li>
-          <li><a href="{{ '/writeups' | relative_url }}">🏆 CTF Writeups</a></li>
-        </ul>
+      <div class="sidebar-header">
+        <span class="sidebar-header-icon" aria-hidden="true">&#128193;</span>
+        <div>
+          <p class="sidebar-kicker">Navigation</p>
+          <h2 class="sidebar-heading">Explorer</h2>
+        </div>
       </div>
 
-      <div class="sidebar-section">
-        <h3 class="sidebar-title">🛡️ Blue Team</h3>
-        <ul class="sidebar-list">
-          <li><a href="#">SOC Operations</a></li>
-          <li><a href="#">SIEM & Log Analysis</a></li>
-          <li><a href="#">Incident Response</a></li>
-          <li><a href="#">Threat Hunting</a></li>
-          <li><a href="#">Malware Analysis</a></li>
-          <li><a href="#">Digital Forensics</a></li>
-        </ul>
-      </div>
+      <ul class="tree-view">
+        <li class="tree-node">
+          <a class="tree-link tree-link-root" href="{{ '/' | relative_url }}">
+            <span class="tree-icon" aria-hidden="true">&#127968;</span>
+            <span>Home</span>
+          </a>
+        </li>
 
-      <div class="sidebar-section">
-        <h3 class="sidebar-title">🔧 Tools & Infra</h3>
-        <ul class="sidebar-list">
-          <li><a href="#">Splunk / ELK</a></li>
-          <li><a href="#">Wireshark</a></li>
-          <li><a href="#">Volatility</a></li>
-          <li><a href="#">YARA Rules</a></li>
-          <li><a href="#">Suricata / Snort</a></li>
-          <li><a href="#">Velociraptor</a></li>
-        </ul>
-      </div>
+        <li class="tree-node tree-node-branch">
+          <span class="tree-branch-label">
+            <span class="tree-icon" aria-hidden="true">&#127942;</span>
+            <span>CTF Writeups</span>
+          </span>
+          <ul class="tree-children">
+            <li class="tree-node"><a class="tree-link" href="{{ '/writeups' | relative_url }}">All Writeups</a></li>
+            <li class="tree-node"><a class="tree-link" href="#">SOC Operations</a></li>
+            <li class="tree-node"><a class="tree-link" href="#">Incident Response</a></li>
+            <li class="tree-node"><a class="tree-link" href="#">Threat Hunting</a></li>
+            <li class="tree-node"><a class="tree-link" href="#">Malware Analysis</a></li>
+            <li class="tree-node"><a class="tree-link" href="#">Digital Forensics</a></li>
+          </ul>
+        </li>
 
-      <div class="sidebar-section">
-        <h3 class="sidebar-title">📚 Knowledge</h3>
-        <ul class="sidebar-list">
-          <li><a href="#">MITRE ATT&CK</a></li>
-          <li><a href="#">Cyber Kill Chain</a></li>
-          <li><a href="#">Network Security</a></li>
-          <li><a href="#">Endpoint Security</a></li>
-          <li><a href="#">Cloud Security</a></li>
-        </ul>
-      </div>
+        <li class="tree-node tree-node-branch">
+          <span class="tree-branch-label">
+            <span class="tree-icon" aria-hidden="true">&#128736;</span>
+            <span>Tools &amp; Infra</span>
+          </span>
+          <ul class="tree-children">
+            <li class="tree-node"><a class="tree-link" href="#">Splunk / ELK</a></li>
+            <li class="tree-node"><a class="tree-link" href="#">Wireshark</a></li>
+            <li class="tree-node"><a class="tree-link" href="#">Volatility</a></li>
+            <li class="tree-node"><a class="tree-link" href="#">YARA Rules</a></li>
+            <li class="tree-node"><a class="tree-link" href="#">Suricata / Snort</a></li>
+            <li class="tree-node"><a class="tree-link" href="#">Velociraptor</a></li>
+          </ul>
+        </li>
 
-      <div class="sidebar-section">
-        <h3 class="sidebar-title">🔗 Links</h3>
-        <ul class="sidebar-list">
-          <li><a href="https://github.com/{{ site.author.github }}" target="_blank">GitHub</a></li>
-          <li><a href="{{ '/about' | relative_url }}">About Me</a></li>
-        </ul>
-      </div>
+        <li class="tree-node tree-node-branch">
+          <span class="tree-branch-label">
+            <span class="tree-icon" aria-hidden="true">&#128218;</span>
+            <span>Knowledge Base</span>
+          </span>
+          <ul class="tree-children">
+            <li class="tree-node"><a class="tree-link" href="#">MITRE ATT&amp;CK</a></li>
+            <li class="tree-node"><a class="tree-link" href="#">Cyber Kill Chain</a></li>
+            <li class="tree-node"><a class="tree-link" href="#">Network Security</a></li>
+            <li class="tree-node"><a class="tree-link" href="#">Endpoint Security</a></li>
+            <li class="tree-node"><a class="tree-link" href="#">Cloud Security</a></li>
+          </ul>
+        </li>
+
+        <li class="tree-node tree-node-branch">
+          <span class="tree-branch-label">
+            <span class="tree-icon" aria-hidden="true">&#128279;</span>
+            <span>Quick Links</span>
+          </span>
+          <ul class="tree-children">
+            <li class="tree-node"><a class="tree-link" href="https://github.com/{{ site.author.github }}" target="_blank" rel="noreferrer">GitHub</a></li>
+            <li class="tree-node"><a class="tree-link" href="{{ '/about' | relative_url }}">About Me</a></li>
+          </ul>
+        </li>
+      </ul>
     </aside>
 
     <main class="site-content">
@@ -87,8 +110,8 @@
   <footer class="site-footer">
     <p>
       &copy; {{ site.time | date: '%Y' }} {{ site.author.name }} &mdash;
-      Powered by <a href="https://pages.github.com" target="_blank">GitHub Pages</a>
-      {% if site.author.github %} | <a href="https://github.com/{{ site.author.github }}" target="_blank">GitHub</a>{% endif %}
+      Powered by <a href="https://pages.github.com" target="_blank" rel="noreferrer">GitHub Pages</a>
+      {% if site.author.github %} | <a href="https://github.com/{{ site.author.github }}" target="_blank" rel="noreferrer">GitHub</a>{% endif %}
     </p>
   </footer>
 

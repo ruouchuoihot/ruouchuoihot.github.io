@@ -674,3 +674,171 @@ img {
 .highlight .p { color: var(--text-primary); }
 .highlight .na { color: #79c0ff; }
 .highlight .nt { color: #7ee787; }
+
+/* --- Tree View Sidebar Overrides --- */
+.layout-wrapper {
+  align-items: flex-start;
+}
+
+.sidebar {
+  width: 300px;
+  min-width: 300px;
+  padding: 1.25rem 1rem 1.5rem;
+  background:
+    linear-gradient(180deg, rgba(30, 41, 59, 0.35), rgba(17, 24, 39, 0) 160px),
+    var(--bg-secondary);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.25rem 0.35rem 1rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-header-icon {
+  width: 2.1rem;
+  height: 2.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  border-radius: 6px;
+  background: rgba(148, 163, 184, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.sidebar-kicker {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+}
+
+.sidebar-heading {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.tree-view,
+.tree-children {
+  list-style: none;
+}
+
+.tree-view {
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+}
+
+.tree-node {
+  position: relative;
+}
+
+.tree-link,
+.tree-branch-label {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2rem;
+  padding: 0.3rem 0.55rem;
+  border-radius: 6px;
+  color: var(--text-secondary);
+}
+
+.tree-link:hover,
+.tree-branch-label:hover {
+  background: rgba(0, 255, 136, 0.08);
+  color: var(--text-primary);
+  text-shadow: none;
+}
+
+.tree-link-root {
+  margin-bottom: 0.35rem;
+}
+
+.tree-node-branch {
+  margin-top: 0.2rem;
+}
+
+.tree-branch-label {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.tree-icon {
+  width: 1rem;
+  text-align: center;
+  opacity: 0.92;
+}
+
+.tree-children {
+  margin-left: 0.95rem;
+  padding-left: 1.15rem;
+  position: relative;
+}
+
+.tree-children::before {
+  content: "";
+  position: absolute;
+  left: 0.32rem;
+  top: 0.15rem;
+  bottom: 0.75rem;
+  width: 1px;
+  background: rgba(148, 163, 184, 0.22);
+}
+
+.tree-children .tree-node::before {
+  content: "";
+  position: absolute;
+  left: -0.82rem;
+  top: 1rem;
+  width: 0.82rem;
+  height: 1px;
+  background: rgba(148, 163, 184, 0.22);
+}
+
+.tree-children .tree-node:last-child::after {
+  content: "";
+  position: absolute;
+  left: -0.83rem;
+  top: 1rem;
+  bottom: 0;
+  width: 2px;
+  background: var(--bg-secondary);
+}
+
+.tree-children .tree-link {
+  font-size: 0.82rem;
+}
+
+.tree-children .tree-link::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  border-radius: 2px;
+  flex: 0 0 auto;
+  background: rgba(148, 163, 184, 0.04);
+}
+
+.tree-children .tree-link:hover::before {
+  border-color: rgba(0, 255, 136, 0.55);
+  background: rgba(0, 255, 136, 0.12);
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 280px;
+    min-width: 280px;
+    padding: 1rem 0.85rem 1.25rem;
+  }
+
+  .tree-view {
+    font-size: 0.83rem;
+  }
+}
