@@ -53,12 +53,92 @@
             </summary>
             <ul class="tree-children">
               <li class="tree-node"><a class="tree-link" href="{{ '/writeups' | relative_url }}">All Writeups</a></li>
-              {% assign sidebar_writeups = site.writeups | sort: 'title' %}
-              {% for writeup in sidebar_writeups %}
-                <li class="tree-node">
-                  <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
-                </li>
-              {% endfor %}
+
+              <li class="tree-node tree-node-branch">
+                <details class="tree-group" open>
+                  <summary class="tree-branch-label tree-branch-label-sub">
+                    <span class="tree-branch-link">SOC Operations</span>
+                  </summary>
+                  <ul class="tree-children">
+                    {% for writeup in site.writeups %}
+                      {% if writeup.category == "soc" %}
+                        <li class="tree-node">
+                          <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </details>
+              </li>
+
+              <li class="tree-node tree-node-branch">
+                <details class="tree-group">
+                  <summary class="tree-branch-label tree-branch-label-sub">
+                    <span class="tree-branch-link">Incident Response</span>
+                  </summary>
+                  <ul class="tree-children">
+                    {% for writeup in site.writeups %}
+                      {% if writeup.category == "incident-response" %}
+                        <li class="tree-node">
+                          <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </details>
+              </li>
+
+              <li class="tree-node tree-node-branch">
+                <details class="tree-group">
+                  <summary class="tree-branch-label tree-branch-label-sub">
+                    <span class="tree-branch-link">Threat Hunting</span>
+                  </summary>
+                  <ul class="tree-children">
+                    {% for writeup in site.writeups %}
+                      {% if writeup.category == "threat-hunting" %}
+                        <li class="tree-node">
+                          <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </details>
+              </li>
+
+              <li class="tree-node tree-node-branch">
+                <details class="tree-group">
+                  <summary class="tree-branch-label tree-branch-label-sub">
+                    <span class="tree-branch-link">Malware Analysis</span>
+                  </summary>
+                  <ul class="tree-children">
+                    {% for writeup in site.writeups %}
+                      {% if writeup.category == "malware" %}
+                        <li class="tree-node">
+                          <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </details>
+              </li>
+
+              <li class="tree-node tree-node-branch">
+                <details class="tree-group" open>
+                  <summary class="tree-branch-label tree-branch-label-sub">
+                    <span class="tree-branch-link">Digital Forensics</span>
+                  </summary>
+                  <ul class="tree-children">
+                    {% for writeup in site.writeups %}
+                      {% if writeup.category == "dfir" or writeup.category == "forensics" %}
+                        <li class="tree-node">
+                          <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </details>
+              </li>
+
               <li class="tree-node tree-node-branch">
                 <details class="tree-group">
                   <summary class="tree-branch-label tree-branch-label-sub">
@@ -67,23 +147,29 @@
                   <ul class="tree-children">
                     {% for post in site.posts %}
                       {% if post.tags contains 'ctf' or post.tags contains 'writeups' %}
-                        <li class="tree-node">
-                          {% if post.title == "CyberDefenders CTF Sync from Notion" %}
-                            <a class="tree-link" href="{{ post.url | relative_url }}">CyberDefenders CTF</a>
-                          {% else %}
+                        {% if post.title == "CyberDefenders CTF Sync from Notion" %}
+                          <li class="tree-node tree-node-branch">
+                            <details class="tree-group" open>
+                              <summary class="tree-branch-label tree-branch-label-sub">
+                                <span class="tree-branch-link">CyberDefenders</span>
+                              </summary>
+                              <ul class="tree-children">
+                                <li class="tree-node">
+                                  <a class="tree-link" href="{{ post.url | relative_url }}">All CyberDefenders Writeups</a>
+                                </li>
+                              </ul>
+                            </details>
+                          </li>
+                        {% else %}
+                          <li class="tree-node">
                             <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-                          {% endif %}
-                        </li>
+                          </li>
+                        {% endif %}
                       {% endif %}
                     {% endfor %}
                   </ul>
                 </details>
               </li>
-              <li class="tree-node"><a class="tree-link" href="#">SOC Operations</a></li>
-              <li class="tree-node"><a class="tree-link" href="#">Incident Response</a></li>
-              <li class="tree-node"><a class="tree-link" href="#">Threat Hunting</a></li>
-              <li class="tree-node"><a class="tree-link" href="#">Malware Analysis</a></li>
-              <li class="tree-node"><a class="tree-link" href="#">Digital Forensics</a></li>
             </ul>
           </details>
         </li>
