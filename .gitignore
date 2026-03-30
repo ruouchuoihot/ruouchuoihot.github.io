@@ -2,6 +2,7 @@ _site/
 .bundle/
 _site_local/
 _site_local_sync/
+_site_preview_menu/
 http-serve.log
 http-serve.err.log
 jekyll-serve.log

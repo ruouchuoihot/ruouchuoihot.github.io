@@ -1,7 +1,7 @@
 ---
 title: "DevOps Note Sync from Notion"
 date: 2026-03-31
-category: misc
+category: knowledge-base
 tags: [notion, sync, devops, docker, traefik]
 excerpt: "Synced index of DevOps notes currently tracked in Notion."
 ---
