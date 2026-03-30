@@ -1,4 +1,11 @@
 _site/
+.bundle/
+_site_local/
+_site_local_sync/
+http-serve.log
+http-serve.err.log
+jekyll-serve.log
+jekyll-serve.err.log
 .jekyll-cache/
 .jekyll-metadata
 .sass-cache/
