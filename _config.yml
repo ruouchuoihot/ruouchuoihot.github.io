@@ -9,6 +9,16 @@ author:
   bio: "CTF Player | Security Researcher"
   github: "ruouchuoihot"
 
+# Certifications
+# Add your certifications here. Example:
+# certifications:
+#   - name: "CompTIA Security+"
+#     issuer: "CompTIA"
+#     issued: "2026"
+#     note: "Badge on Credly"
+#     url: "https://www.credly.com/badges/your-badge-id"
+certifications: []
+
 # Build settings
 markdown: kramdown
 highlighter: rouge

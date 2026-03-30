@@ -3,30 +3,29 @@ layout: page
 title: About
 ---
 
-<div class="about-content">
+## Xin chao!
 
-## 👋 Xin chào!
+Minh la **ruouchuoihot**, mot Blue Team enthusiast va SOC Analyst.
 
-Mình là **ruouchuoihot**, một Blue Team enthusiast và SOC Analyst.
+Blog nay la noi minh chia se:
 
-Blog này là nơi mình chia sẻ:
-- 🛡️ **Defensive CTF Writeups** — Giải thích chi tiết cách giải các challenge Blue Team
-- 📚 **Kiến thức bảo mật** — SOC, SIEM, DFIR, Threat Hunting
-- 🔧 **Tools & Techniques** — Các công cụ và kỹ thuật phòng thủ
+- **Defensive CTF Writeups**: Giai thich chi tiet cach giai cac challenge Blue Team
+- **Kien thuc bao mat**: SOC, SIEM, DFIR, Threat Hunting
+- **Tools & Techniques**: Cac cong cu va ky thuat phong thu
 
-## 🎯 Focus Areas
+## Focus Areas
 
-- **SOC Operations** — Alert triage, investigation, escalation
-- **SIEM** — Splunk, ELK Stack, log analysis
-- **Digital Forensics & Incident Response (DFIR)** — Memory, disk, network forensics
-- **Threat Hunting** — Proactive detection, MITRE ATT&CK
-- **Malware Analysis** — Static & dynamic analysis
-- **Network Security** — IDS/IPS, traffic analysis
+- **SOC Operations**: Alert triage, investigation, escalation
+- **SIEM**: Splunk, ELK Stack, log analysis
+- **Digital Forensics & Incident Response (DFIR)**: Memory, disk, network forensics
+- **Threat Hunting**: Proactive detection, MITRE ATT&CK
+- **Malware Analysis**: Static va dynamic analysis
+- **Network Security**: IDS/IPS, traffic analysis
 
-## 🛠️ Toolset
+## Toolset
 
-| Loại | Tools |
-|------|-------|
+| Loai | Tools |
+| --- | --- |
 | SIEM | Splunk, ELK, Wazuh |
 | Forensics | Volatility, FTK Imager, Autopsy |
 | Network | Wireshark, Suricata, Zeek |
@@ -34,8 +33,27 @@ Blog này là nơi mình chia sẻ:
 | Endpoint | Velociraptor, OSQuery |
 | Framework | MITRE ATT&CK, Cyber Kill Chain |
 
-## 📫 Contact
+## Certifications
+
+{% if site.certifications and site.certifications.size > 0 %}
+<div class="cert-grid">
+  {% for cert in site.certifications %}
+    <a class="cert-card" href="{{ cert.url }}" target="_blank" rel="noreferrer">
+      <span class="cert-issuer">{{ cert.issuer }}</span>
+      <strong class="cert-name">{{ cert.name }}</strong>
+      {% if cert.issued %}
+        <span class="cert-meta">Issued: {{ cert.issued }}</span>
+      {% endif %}
+      {% if cert.note %}
+        <span class="cert-meta">{{ cert.note }}</span>
+      {% endif %}
+    </a>
+  {% endfor %}
+</div>
+{% else %}
+Chua co certification nao duoc them. Ban co the cap nhat danh sach trong `_config.yml` bang ten cert va link Credly.
+{% endif %}
+
+## Contact
 
 - GitHub: [github.com/ruouchuoihot](https://github.com/ruouchuoihot)
-
-</div>
