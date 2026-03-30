@@ -8,6 +8,8 @@ _site_preview_actions_fix/
 _site_preview_pages_fix/
 _site_preview_category_tree/
 _site_preview_hubs_import/
+_site_preview_no_hubs/
+_site_preview_fuller_writeups/
 http-serve.log
 http-serve.err.log
 jekyll-serve.log
