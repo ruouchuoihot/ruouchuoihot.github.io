@@ -25,6 +25,8 @@ featured_certifications:
     status: "Active"
     url: "https://www.credly.com/badges/110ed77d-d158-4075-9f64-6cc986d4161f/public_url"
     color: "blue"
+    embed_code: |
+      <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="110ed77d-d158-4075-9f64-6cc986d4161f" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
     # image: "https://images.credly.com/..."
     # expires: "Dec 17, 2028"
 
@@ -34,6 +36,8 @@ featured_certifications:
     status: "Active"
     url: "https://www.credly.com/badges/9ea5771a-a9ff-47ed-9756-325b05551531/public_url"
     color: "blue"
+    # embed_code: |
+    #   <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="..." data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
     # image: "https://images.credly.com/..."
     # expires: "Dec 6, 2028"
 
@@ -43,6 +47,8 @@ featured_certifications:
     status: "Active"
     url: "https://www.credly.com/badges/23fb1941-faed-4c8e-9d9e-8264244cf3e0/public_url"
     color: "blue"
+    # embed_code: |
+    #   <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="..." data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
     # image: "https://images.credly.com/..."
     # expires: "Dec 26, 2027"
 

@@ -3,76 +3,6 @@ layout: default
 ---
 
 <article class="about-page">
-  <header class="writeup-header about-hero">
-    <div class="about-hero-copy">
-      <p class="about-eyebrow">Profile</p>
-      <h1>{{ site.author.name }}</h1>
-      <p class="about-summary">
-        {{ site.author.role | default: site.description }}
-      </p>
-      <div class="about-actions">
-        {% if site.author.github %}
-          <a class="about-action primary" href="https://github.com/{{ site.author.github }}" target="_blank" rel="noreferrer">GitHub</a>
-        {% endif %}
-        {% if site.credly.profile_url != blank %}
-          <a class="about-action" href="{{ site.credly.profile_url }}" target="_blank" rel="noreferrer">Credly Profile</a>
-        {% endif %}
-      </div>
-    </div>
-
-    <div class="about-hero-stats">
-      <div class="about-stat">
-        <span class="about-stat-label">Focus</span>
-        <strong>Blue Team</strong>
-      </div>
-      <div class="about-stat">
-        <span class="about-stat-label">Track</span>
-        <strong>SOC / DFIR</strong>
-      </div>
-      <div class="about-stat">
-        <span class="about-stat-label">Content</span>
-        <strong>Writeups</strong>
-      </div>
-    </div>
-  </header>
-
-  <div class="about-layout">
-    <section class="about-main about-panel">
-      <div class="post-content about-copy">
-        {{ content }}
-      </div>
-    </section>
-
-    <aside class="about-sidebar">
-      <section class="about-panel about-stack">
-        <h2 class="about-panel-title">Snapshot</h2>
-        <ul class="about-mini-list">
-          <li>Blue Team writeups va practical notes</li>
-          <li>SOC workflows, SIEM, DFIR, threat hunting</li>
-          <li>Tool-driven learning voi labs va investigations</li>
-        </ul>
-      </section>
-
-      <section class="about-panel about-cert-panel">
-        <h2 class="about-panel-title">Certificates</h2>
-        {% if site.credly.profile_url != blank %}
-          <p class="about-panel-text">
-            Quan ly badge tren Credly va mo ho so cong khai. Trang nay chi can tro toi profile do, khong can upload tung cert vao source code.
-          </p>
-          <a class="cert-profile-card" href="{{ site.credly.profile_url }}" target="_blank" rel="noreferrer">
-            <span class="cert-profile-kicker">External Profile</span>
-            <strong class="cert-profile-title">View all badges on Credly</strong>
-            <span class="cert-profile-text">{{ site.credly.handle | default: site.credly.profile_url }}</span>
-          </a>
-        {% else %}
-          <p class="about-panel-text">
-            Them `credly.profile_url` trong `_config.yml` de hien nut di toi ho so badge cua ban.
-          </p>
-        {% endif %}
-      </section>
-    </aside>
-  </div>
-
   {% if site.featured_certifications and site.featured_certifications.size > 0 %}
     <section class="about-panel badge-wallet-panel">
       <div class="badge-wallet-header">
@@ -87,9 +17,13 @@ layout: default
 
       <div class="badge-wallet-grid">
         {% for cert in site.featured_certifications %}
-          <a class="badge-wallet-card" href="{{ cert.url }}" target="_blank" rel="noreferrer">
+          <div class="badge-wallet-card">
             <div class="badge-wallet-media{% if cert.color %} badge-wallet-media-{{ cert.color }}{% endif %}">
-              {% if cert.image %}
+              {% if cert.embed_code %}
+                <div class="badge-wallet-embed">
+                  {{ cert.embed_code }}
+                </div>
+              {% elsif cert.image %}
                 <img class="badge-wallet-image" src="{{ cert.image }}" alt="{{ cert.name }} badge">
               {% else %}
                 <div class="badge-wallet-fallback">
@@ -113,10 +47,38 @@ layout: default
                   <span class="cert-badge-status">{{ cert.status }}</span>
                 {% endif %}
               </div>
+              {% if cert.url %}
+                <a class="badge-wallet-link" href="{{ cert.url }}" target="_blank" rel="noreferrer">View badge</a>
+              {% endif %}
             </div>
-          </a>
+          </div>
         {% endfor %}
       </div>
     </section>
   {% endif %}
+
+  <section class="about-panel about-main-panel">
+    <div class="about-main-header">
+      <div>
+        <p class="about-eyebrow">About</p>
+        <h2 class="badge-wallet-title">{{ site.author.name }}</h2>
+      </div>
+      <div class="about-actions">
+        {% if site.author.github %}
+          <a class="about-action primary" href="https://github.com/{{ site.author.github }}" target="_blank" rel="noreferrer">GitHub</a>
+        {% endif %}
+        {% if site.credly.profile_url != blank %}
+          <a class="about-action" href="{{ site.credly.profile_url }}" target="_blank" rel="noreferrer">Credly Profile</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <p class="about-summary">
+      {{ site.author.role | default: site.description }}
+    </p>
+
+    <div class="post-content about-copy">
+      {{ content }}
+    </div>
+  </section>
 </article>

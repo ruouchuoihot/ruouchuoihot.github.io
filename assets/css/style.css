@@ -751,6 +751,18 @@ img {
   color: var(--text-primary);
 }
 
+.about-main-panel {
+  padding: 1.6rem;
+}
+
+.about-main-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
 .badge-wallet-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -772,8 +784,6 @@ img {
 .badge-wallet-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 18px 35px rgba(2, 6, 23, 0.18);
-  color: #0f172a;
-  text-shadow: none;
 }
 
 .badge-wallet-media {
@@ -811,6 +821,18 @@ img {
   max-height: 180px;
   object-fit: contain;
   border-radius: 0;
+}
+
+.badge-wallet-embed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.badge-wallet-embed > div,
+.badge-wallet-embed iframe {
+  max-width: 100%;
 }
 
 .badge-wallet-fallback {
@@ -864,6 +886,27 @@ img {
   margin-top: 0.35rem;
   color: #475569;
   font-size: 0.88rem;
+}
+
+.badge-wallet-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.4rem;
+  width: fit-content;
+  padding: 0.6rem 0.95rem;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #0f172a;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.badge-wallet-link:hover {
+  border-color: var(--accent-dim);
+  color: #0f172a;
+  text-shadow: none;
 }
 
 .cert-badge-status {
@@ -972,6 +1015,11 @@ img {
 
   .badge-wallet-grid {
     grid-template-columns: 1fr;
+  }
+
+  .about-main-header {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .menu-toggle {
