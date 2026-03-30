@@ -733,6 +733,83 @@ img {
   font-size: 0.95rem;
 }
 
+.cert-badge-list {
+  display: grid;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.cert-badge-panel {
+  display: block;
+  padding: 0.95rem 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(circle at top right, rgba(0, 255, 136, 0.1), transparent 30%),
+    linear-gradient(180deg, rgba(26, 31, 46, 0.98), rgba(17, 24, 39, 0.94));
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.cert-badge-panel:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+  text-shadow: none;
+}
+
+.cert-badge-panel-blue {
+  background:
+    radial-gradient(circle at top right, rgba(0, 212, 255, 0.14), transparent 32%),
+    linear-gradient(180deg, rgba(26, 31, 46, 0.98), rgba(17, 24, 39, 0.94));
+}
+
+.cert-badge-panel-orange {
+  background:
+    radial-gradient(circle at top right, rgba(255, 107, 53, 0.14), transparent 32%),
+    linear-gradient(180deg, rgba(26, 31, 46, 0.98), rgba(17, 24, 39, 0.94));
+}
+
+.cert-badge-panel-purple {
+  background:
+    radial-gradient(circle at top right, rgba(168, 85, 247, 0.14), transparent 32%),
+    linear-gradient(180deg, rgba(26, 31, 46, 0.98), rgba(17, 24, 39, 0.94));
+}
+
+.cert-badge-issuer {
+  display: block;
+  color: var(--accent-secondary);
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.35rem;
+}
+
+.cert-badge-name {
+  display: block;
+  color: var(--text-primary);
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+
+.cert-badge-meta {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.cert-badge-status {
+  padding: 0.12rem 0.45rem;
+  border: 1px solid rgba(0, 255, 136, 0.25);
+  border-radius: 999px;
+  background: rgba(0, 255, 136, 0.08);
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
 .about-mini-list {
   list-style: none;
   display: grid;

@@ -55,6 +55,24 @@ layout: default
 
       <section class="about-panel about-cert-panel">
         <h2 class="about-panel-title">Certificates</h2>
+        {% if site.featured_certifications and site.featured_certifications.size > 0 %}
+          <div class="cert-badge-list">
+            {% for cert in site.featured_certifications %}
+              <a class="cert-badge-panel{% if cert.color %} cert-badge-panel-{{ cert.color }}{% endif %}" href="{{ cert.url }}" target="_blank" rel="noreferrer">
+                <span class="cert-badge-issuer">{{ cert.issuer }}</span>
+                <strong class="cert-badge-name">{{ cert.name }}</strong>
+                <div class="cert-badge-meta">
+                  {% if cert.issued %}
+                    <span>Issued {{ cert.issued }}</span>
+                  {% endif %}
+                  {% if cert.status %}
+                    <span class="cert-badge-status">{{ cert.status }}</span>
+                  {% endif %}
+                </div>
+              </a>
+            {% endfor %}
+          </div>
+        {% endif %}
         {% if site.credly.profile_url != blank %}
           <p class="about-panel-text">
             Quan ly badge tren Credly va mo ho so cong khai. Trang nay chi can tro toi profile do, khong can upload tung cert vao source code.

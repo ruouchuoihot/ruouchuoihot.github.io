@@ -14,7 +14,31 @@ author:
 # Update only this public profile URL. Manage badges directly on Credly.
 credly:
   handle: ""
-  profile_url: ""
+  profile_url: "https://www.credly.com/users/duong-nguyen-thai"
+
+# Optional featured certifications shown as badge panels on the About page.
+# Add or remove items here without touching templates.
+featured_certifications:
+  - name: "HACKTHEBOX CDSA"
+    issuer: "HACKTHEBOX"
+    issued: "2025"
+    status: "Active"
+    url: "https://www.credly.com/badges/110ed77d-d158-4075-9f64-6cc986d4161f/public_url"
+    color: "blue"
+
+  - name: "Splunk Core Certified Power User"
+    issuer: "Splunk"
+    issued: "2025"
+    status: "Active"
+    url: "https://www.credly.com/badges/9ea5771a-a9ff-47ed-9756-325b05551531/public_url"
+    color: "blue"
+
+  - name: "Splunk Certified Cybersecurity Defense Analyst"
+    issuer: "Splunk"
+    issued: "2024"
+    status: "Active"
+    url: "https://www.credly.com/badges/23fb1941-faed-4c8e-9d9e-8264244cf3e0/public_url"
+    color: "blue"
 
 # Build settings
 markdown: kramdown
