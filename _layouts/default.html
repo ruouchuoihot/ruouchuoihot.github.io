@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
+  {% seo %}
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
+      <nav>
+        <ul class="site-nav">
+          <li><a href="{{ '/' | relative_url }}">Home</a></li>
+          <li><a href="{{ '/writeups' | relative_url }}">Writeups</a></li>
+          <li><a href="{{ '/about' | relative_url }}">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-content">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      &copy; {{ site.time | date: '%Y' }} {{ site.author.name }} &mdash;
+      Powered by <a href="https://pages.github.com" target="_blank">GitHub Pages</a>
+      {% if site.author.github %} | <a href="https://github.com/{{ site.author.github }}" target="_blank">GitHub</a>{% endif %}
+    </p>
+  </footer>
+
+</body>
+</html>

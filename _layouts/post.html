@@ -1,0 +1,26 @@
+---
+layout: default
+---
+
+<article>
+  <header style="margin-bottom: 2rem;">
+    <h1 class="post-content" style="font-size: 2rem; margin-bottom: 0.5rem;">{{ page.title }}</h1>
+    <div class="post-meta">
+      <span class="post-date">{{ page.date | date: "%d/%m/%Y" }}</span>
+      {% if page.category %}
+      <span class="post-category {{ page.category | downcase }}">{{ page.category }}</span>
+      {% endif %}
+    </div>
+    {% if page.tags %}
+    <div style="margin-top: 0.8rem;">
+      {% for tag in page.tags %}
+      <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+</article>

@@ -1,0 +1,43 @@
+---
+layout: default
+title: Writeups
+---
+
+<h1 class="section-title">CTF Writeups</h1>
+
+{% assign sorted_writeups = site.writeups | sort: 'date' | reverse %}
+
+{% if sorted_writeups.size > 0 %}
+<ul class="post-list">
+  {% for writeup in sorted_writeups %}
+  <li class="post-item">
+    <div class="post-meta">
+      <span class="post-date">{{ writeup.date | date: "%d/%m/%Y" }}</span>
+      {% if writeup.ctf %}<span>🏆 {{ writeup.ctf }}</span>{% endif %}
+      {% if writeup.category %}
+      <span class="post-category {{ writeup.category | downcase }}">{{ writeup.category }}</span>
+      {% endif %}
+      {% if writeup.difficulty %}
+      <span class="difficulty {{ writeup.difficulty | downcase }}">{{ writeup.difficulty }}</span>
+      {% endif %}
+      {% if writeup.points %}<span>💰 {{ writeup.points }} pts</span>{% endif %}
+    </div>
+    <h3 class="post-title">
+      <a href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+    </h3>
+    {% if writeup.excerpt %}
+    <p class="post-excerpt">{{ writeup.excerpt | strip_html | truncate: 200 }}</p>
+    {% endif %}
+    {% if writeup.tags %}
+    <div style="margin-top: 0.5rem;">
+      {% for tag in writeup.tags %}
+      <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p style="color: var(--text-muted); text-align: center; padding: 3rem 0;">Chưa có writeup nào. Hãy tạo file trong <code>_writeups/</code> để bắt đầu!</p>
+{% endif %}
