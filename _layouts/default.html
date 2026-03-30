@@ -57,6 +57,64 @@
               <li class="tree-node tree-node-branch">
                 <details class="tree-group" open>
                   <summary class="tree-branch-label tree-branch-label-sub">
+                    <span class="tree-branch-link">CyberDefenders</span>
+                  </summary>
+                  <ul class="tree-children">
+                    {% for post in site.posts %}
+                      {% if post.slug == "cyberdefenders-ctf-sync" %}
+                        <li class="tree-node">
+                          <a class="tree-link" href="{{ post.url | relative_url }}">Overview</a>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                    {% for writeup in site.writeups %}
+                      {% if writeup.ctf contains "CyberDefenders" %}
+                        <li class="tree-node">
+                          <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </details>
+              </li>
+
+              <li class="tree-node tree-node-branch">
+                <details class="tree-group">
+                  <summary class="tree-branch-label tree-branch-label-sub">
+                    <span class="tree-branch-link">Blue Team Labs Online</span>
+                  </summary>
+                  <ul class="tree-children">
+                    {% for writeup in site.writeups %}
+                      {% if writeup.ctf contains "Blue Team Labs Online" %}
+                        <li class="tree-node">
+                          <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </details>
+              </li>
+
+              <li class="tree-node tree-node-branch">
+                <details class="tree-group">
+                  <summary class="tree-branch-label tree-branch-label-sub">
+                    <span class="tree-branch-link">Hack The Box</span>
+                  </summary>
+                  <ul class="tree-children">
+                    {% for writeup in site.writeups %}
+                      {% if writeup.ctf contains "Hack The Box" or writeup.ctf contains "HTB" %}
+                        <li class="tree-node">
+                          <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </details>
+              </li>
+
+              <li class="tree-node tree-node-branch">
+                <details class="tree-group" open>
+                  <summary class="tree-branch-label tree-branch-label-sub">
                     <span class="tree-branch-link">SOC Operations</span>
                   </summary>
                   <ul class="tree-children">
@@ -139,72 +197,6 @@
                 </details>
               </li>
 
-              <li class="tree-node tree-node-branch">
-                <details class="tree-group">
-                  <summary class="tree-branch-label tree-branch-label-sub">
-                    <span class="tree-branch-link">CTF Hubs</span>
-                  </summary>
-                  <ul class="tree-children">
-                    <li class="tree-node tree-node-branch">
-                      <details class="tree-group" open>
-                        <summary class="tree-branch-label tree-branch-label-sub">
-                          <span class="tree-branch-link">CyberDefenders</span>
-                        </summary>
-                        <ul class="tree-children">
-                          {% for post in site.posts %}
-                            {% if post.slug == "cyberdefenders-ctf-sync" %}
-                              <li class="tree-node">
-                                <a class="tree-link" href="{{ post.url | relative_url }}">Overview</a>
-                              </li>
-                            {% endif %}
-                          {% endfor %}
-                          {% for writeup in site.writeups %}
-                            {% if writeup.ctf contains "CyberDefenders" %}
-                              <li class="tree-node">
-                                <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
-                              </li>
-                            {% endif %}
-                          {% endfor %}
-                        </ul>
-                      </details>
-                    </li>
-
-                    <li class="tree-node tree-node-branch">
-                      <details class="tree-group">
-                        <summary class="tree-branch-label tree-branch-label-sub">
-                          <span class="tree-branch-link">Blue Team Labs Online</span>
-                        </summary>
-                        <ul class="tree-children">
-                          {% for writeup in site.writeups %}
-                            {% if writeup.ctf contains "Blue Team Labs Online" %}
-                              <li class="tree-node">
-                                <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
-                              </li>
-                            {% endif %}
-                          {% endfor %}
-                        </ul>
-                      </details>
-                    </li>
-
-                    <li class="tree-node tree-node-branch">
-                      <details class="tree-group">
-                        <summary class="tree-branch-label tree-branch-label-sub">
-                          <span class="tree-branch-link">Hack The Box</span>
-                        </summary>
-                        <ul class="tree-children">
-                          {% for writeup in site.writeups %}
-                            {% if writeup.ctf contains "Hack The Box" or writeup.ctf contains "HTB" %}
-                              <li class="tree-node">
-                                <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
-                              </li>
-                            {% endif %}
-                          {% endfor %}
-                        </ul>
-                      </details>
-                    </li>
-                  </ul>
-                </details>
-              </li>
             </ul>
           </details>
         </li>
