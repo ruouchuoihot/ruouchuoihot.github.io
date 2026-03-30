@@ -3,6 +3,27 @@ layout: default
 ---
 
 <article class="about-page">
+  <section class="about-panel about-main-panel">
+    <div class="about-main-header">
+      <div>
+        <p class="about-eyebrow">About</p>
+        <h2 class="badge-wallet-title">{{ site.author.name }}</h2>
+      </div>
+      <div class="about-actions">
+        {% if site.author.github %}
+          <a class="about-action primary" href="https://github.com/{{ site.author.github }}" target="_blank" rel="noreferrer">GitHub</a>
+        {% endif %}
+        {% if site.credly.profile_url != blank %}
+          <a class="about-action" href="{{ site.credly.profile_url }}" target="_blank" rel="noreferrer">Credly Profile</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <p class="about-summary">
+      {{ site.author.role | default: site.description }}
+    </p>
+  </section>
+
   {% if site.featured_certifications and site.featured_certifications.size > 0 %}
     <section class="about-panel badge-wallet-panel">
       <div class="badge-wallet-header">
@@ -10,9 +31,6 @@ layout: default
           <p class="about-eyebrow">Certifications</p>
           <h2 class="badge-wallet-title">Badge Wallet</h2>
         </div>
-        {% if site.credly.profile_url != blank %}
-          <a class="about-action" href="{{ site.credly.profile_url }}" target="_blank" rel="noreferrer">Open Credly</a>
-        {% endif %}
       </div>
 
       <div class="badge-wallet-grid">
@@ -22,13 +40,6 @@ layout: default
               {% if cert.embed_code %}
                 <div class="badge-wallet-embed">
                   {{ cert.embed_code }}
-                </div>
-              {% elsif cert.image %}
-                <img class="badge-wallet-image" src="{{ cert.image }}" alt="{{ cert.name }} badge">
-              {% else %}
-                <div class="badge-wallet-fallback">
-                  <span class="badge-wallet-fallback-issuer">{{ cert.issuer }}</span>
-                  <strong class="badge-wallet-fallback-name">{{ cert.name }}</strong>
                 </div>
               {% endif %}
             </div>
@@ -57,26 +68,7 @@ layout: default
     </section>
   {% endif %}
 
-  <section class="about-panel about-main-panel">
-    <div class="about-main-header">
-      <div>
-        <p class="about-eyebrow">About</p>
-        <h2 class="badge-wallet-title">{{ site.author.name }}</h2>
-      </div>
-      <div class="about-actions">
-        {% if site.author.github %}
-          <a class="about-action primary" href="https://github.com/{{ site.author.github }}" target="_blank" rel="noreferrer">GitHub</a>
-        {% endif %}
-        {% if site.credly.profile_url != blank %}
-          <a class="about-action" href="{{ site.credly.profile_url }}" target="_blank" rel="noreferrer">Credly Profile</a>
-        {% endif %}
-      </div>
-    </div>
-
-    <p class="about-summary">
-      {{ site.author.role | default: site.description }}
-    </p>
-
+  <section class="about-panel about-copy-panel">
     <div class="post-content about-copy">
       {{ content }}
     </div>
