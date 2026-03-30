@@ -46,58 +46,66 @@
         </li>
 
         <li class="tree-node tree-node-branch">
-          <span class="tree-branch-label">
-            <span class="tree-icon" aria-hidden="true">&#127942;</span>
-            <span>CTF Writeups</span>
-          </span>
-          <ul class="tree-children">
-            <li class="tree-node"><a class="tree-link" href="{{ '/writeups' | relative_url }}">All Writeups</a></li>
-            <li class="tree-node"><a class="tree-link" href="#">SOC Operations</a></li>
-            <li class="tree-node"><a class="tree-link" href="#">Incident Response</a></li>
-            <li class="tree-node"><a class="tree-link" href="#">Threat Hunting</a></li>
-            <li class="tree-node"><a class="tree-link" href="#">Malware Analysis</a></li>
-            <li class="tree-node"><a class="tree-link" href="#">Digital Forensics</a></li>
-          </ul>
+          <details class="tree-group" open>
+            <summary class="tree-branch-label">
+              <span class="tree-icon" aria-hidden="true">&#127942;</span>
+              <span>CTF Writeups</span>
+            </summary>
+            <ul class="tree-children">
+              <li class="tree-node"><a class="tree-link" href="{{ '/writeups' | relative_url }}">All Writeups</a></li>
+              <li class="tree-node"><a class="tree-link" href="#">SOC Operations</a></li>
+              <li class="tree-node"><a class="tree-link" href="#">Incident Response</a></li>
+              <li class="tree-node"><a class="tree-link" href="#">Threat Hunting</a></li>
+              <li class="tree-node"><a class="tree-link" href="#">Malware Analysis</a></li>
+              <li class="tree-node"><a class="tree-link" href="#">Digital Forensics</a></li>
+            </ul>
+          </details>
         </li>
 
         <li class="tree-node tree-node-branch">
-          <span class="tree-branch-label">
-            <span class="tree-icon" aria-hidden="true">&#128736;</span>
-            <span>Tools &amp; Infra</span>
-          </span>
-          <ul class="tree-children">
-            <li class="tree-node"><a class="tree-link" href="#">Splunk / ELK</a></li>
-            <li class="tree-node"><a class="tree-link" href="#">Wireshark</a></li>
-            <li class="tree-node"><a class="tree-link" href="#">Volatility</a></li>
-            <li class="tree-node"><a class="tree-link" href="#">YARA Rules</a></li>
-            <li class="tree-node"><a class="tree-link" href="#">Suricata / Snort</a></li>
-            <li class="tree-node"><a class="tree-link" href="#">Velociraptor</a></li>
-          </ul>
+          <details class="tree-group" open>
+            <summary class="tree-branch-label">
+              <span class="tree-icon" aria-hidden="true">&#128736;</span>
+              <span>Tools &amp; Infra</span>
+            </summary>
+            <ul class="tree-children">
+              <li class="tree-node"><a class="tree-link" href="#">Splunk / ELK</a></li>
+              <li class="tree-node"><a class="tree-link" href="#">Wireshark</a></li>
+              <li class="tree-node"><a class="tree-link" href="#">Volatility</a></li>
+              <li class="tree-node"><a class="tree-link" href="#">YARA Rules</a></li>
+              <li class="tree-node"><a class="tree-link" href="#">Suricata / Snort</a></li>
+              <li class="tree-node"><a class="tree-link" href="#">Velociraptor</a></li>
+            </ul>
+          </details>
         </li>
 
         <li class="tree-node tree-node-branch">
-          <span class="tree-branch-label">
-            <span class="tree-icon" aria-hidden="true">&#128218;</span>
-            <span>Knowledge Base</span>
-          </span>
-          <ul class="tree-children">
-            <li class="tree-node"><a class="tree-link" href="#">MITRE ATT&amp;CK</a></li>
-            <li class="tree-node"><a class="tree-link" href="#">Cyber Kill Chain</a></li>
-            <li class="tree-node"><a class="tree-link" href="#">Network Security</a></li>
-            <li class="tree-node"><a class="tree-link" href="#">Endpoint Security</a></li>
-            <li class="tree-node"><a class="tree-link" href="#">Cloud Security</a></li>
-          </ul>
+          <details class="tree-group" open>
+            <summary class="tree-branch-label">
+              <span class="tree-icon" aria-hidden="true">&#128218;</span>
+              <span>Knowledge Base</span>
+            </summary>
+            <ul class="tree-children">
+              <li class="tree-node"><a class="tree-link" href="#">MITRE ATT&amp;CK</a></li>
+              <li class="tree-node"><a class="tree-link" href="#">Cyber Kill Chain</a></li>
+              <li class="tree-node"><a class="tree-link" href="#">Network Security</a></li>
+              <li class="tree-node"><a class="tree-link" href="#">Endpoint Security</a></li>
+              <li class="tree-node"><a class="tree-link" href="#">Cloud Security</a></li>
+            </ul>
+          </details>
         </li>
 
         <li class="tree-node tree-node-branch">
-          <span class="tree-branch-label">
-            <span class="tree-icon" aria-hidden="true">&#128279;</span>
-            <span>Quick Links</span>
-          </span>
-          <ul class="tree-children">
-            <li class="tree-node"><a class="tree-link" href="https://github.com/{{ site.author.github }}" target="_blank" rel="noreferrer">GitHub</a></li>
-            <li class="tree-node"><a class="tree-link" href="{{ '/about' | relative_url }}">About Me</a></li>
-          </ul>
+          <details class="tree-group" open>
+            <summary class="tree-branch-label">
+              <span class="tree-icon" aria-hidden="true">&#128279;</span>
+              <span>Quick Links</span>
+            </summary>
+            <ul class="tree-children">
+              <li class="tree-node"><a class="tree-link" href="https://github.com/{{ site.author.github }}" target="_blank" rel="noreferrer">GitHub</a></li>
+              <li class="tree-node"><a class="tree-link" href="{{ '/about' | relative_url }}">About Me</a></li>
+            </ul>
+          </details>
         </li>
       </ul>
     </aside>

@@ -1,64 +1,28 @@
-# CTF Blog
+# ruouchuoihot's blog
 
-Blog cá nhân về CTF writeups và kiến thức Cyber Security.
+Blog ca nhan ve CTF writeups, Blue Team, SOC va cyber defense.
 
-## 🚀 Deploy lên GitHub Pages
+## Noi dung chinh
 
-### Bước 1: Tạo GitHub Repository
-1. Vào [github.com/new](https://github.com/new)
-2. Đặt tên repo: `<username>.github.io` (thay `<username>` bằng GitHub username của bạn)
-3. Chọn **Public**
-4. Click **Create repository**
+- CTF writeups va defensive labs
+- Bai viet ve SOC operations, DFIR, threat hunting
+- Ghi chu va kien thuc practical cho Blue Team
 
-### Bước 2: Push code lên GitHub
-```bash
-cd E:\app\ctf-blog
-git init
-git add .
-git commit -m "Initial commit: CTF Blog"
-git branch -M main
-git remote add origin https://github.com/<username>/<username>.github.io.git
-git push -u origin main
+## Cau truc repo
+
+```text
+_config.yml
+_layouts/
+_posts/
+_writeups/
+assets/css/style.css
+index.html
+writeups.html
+about.md
 ```
 
-### Bước 3: Bật GitHub Pages
-1. Vào repo Settings → Pages
-2. Source: chọn **GitHub Actions** (hoặc **Deploy from a branch** → `main`)
-3. Đợi 1-2 phút, truy cập `https://<username>.github.io`
+## Cap nhat noi dung
 
-## 📝 Viết bài mới
-
-### Blog post thường
-Tạo file trong `_posts/` theo format:
-```
-_posts/YYYY-MM-DD-ten-bai-viet.md
-```
-
-### CTF Writeup
-Tạo file trong `_writeups/`:
-```
-_writeups/ten-challenge.md
-```
-
-## 📁 Cấu trúc thư mục
-
-```
-ctf-blog/
-├── _config.yml          # Cấu hình Jekyll
-├── _layouts/            # Layout templates
-├── _includes/           # Components tái sử dụng
-├── _posts/              # Blog posts
-├── _writeups/           # CTF writeups
-├── assets/
-│   └── css/
-│       └── style.css    # Theme CSS
-├── index.html           # Trang chủ
-├── writeups.html        # Trang danh sách writeups
-└── about.md             # Giới thiệu
-```
-
-## 🎨 Tuỳ chỉnh
-
-- Sửa `_config.yml` để đổi tên blog, author info
-- Sửa `assets/css/style.css` để thay đổi theme
-- Sửa `_layouts/` để thay đổi layout
+- Bai viet thuong dat trong `_posts/`
+- Writeup dat trong `_writeups/`
+- Giao dien va bo cuc nam trong `_layouts/` va `assets/css/style.css`
