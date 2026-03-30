@@ -733,72 +733,137 @@ img {
   font-size: 0.95rem;
 }
 
-.cert-badge-list {
+.badge-wallet-panel {
+  padding: 1.6rem;
+}
+
+.badge-wallet-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.badge-wallet-title {
+  font-size: 2rem;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.badge-wallet-grid {
   display: grid;
-  gap: 0.85rem;
-  margin-bottom: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
 }
 
-.cert-badge-panel {
-  display: block;
-  padding: 0.95rem 1rem;
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  border-radius: var(--radius);
-  background:
-    radial-gradient(circle at top right, rgba(0, 255, 136, 0.1), transparent 30%),
-    linear-gradient(180deg, rgba(26, 31, 46, 0.98), rgba(17, 24, 39, 0.94));
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+.badge-wallet-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.98), rgba(241, 245, 249, 0.96));
+  color: #132238;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(2, 6, 23, 0.12);
 }
 
-.cert-badge-panel:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+.badge-wallet-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 35px rgba(2, 6, 23, 0.18);
+  color: #0f172a;
   text-shadow: none;
 }
 
-.cert-badge-panel-blue {
+.badge-wallet-media {
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
   background:
-    radial-gradient(circle at top right, rgba(0, 212, 255, 0.14), transparent 32%),
-    linear-gradient(180deg, rgba(26, 31, 46, 0.98), rgba(17, 24, 39, 0.94));
+    radial-gradient(circle at top, rgba(15, 23, 42, 0.05), transparent 55%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.94));
 }
 
-.cert-badge-panel-orange {
+.badge-wallet-media-blue {
   background:
-    radial-gradient(circle at top right, rgba(255, 107, 53, 0.14), transparent 32%),
-    linear-gradient(180deg, rgba(26, 31, 46, 0.98), rgba(17, 24, 39, 0.94));
+    radial-gradient(circle at top, rgba(0, 212, 255, 0.12), transparent 52%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 245, 249, 0.94));
 }
 
-.cert-badge-panel-purple {
+.badge-wallet-media-orange {
   background:
-    radial-gradient(circle at top right, rgba(168, 85, 247, 0.14), transparent 32%),
-    linear-gradient(180deg, rgba(26, 31, 46, 0.98), rgba(17, 24, 39, 0.94));
+    radial-gradient(circle at top, rgba(255, 107, 53, 0.12), transparent 52%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 245, 249, 0.94));
 }
 
-.cert-badge-issuer {
+.badge-wallet-media-purple {
+  background:
+    radial-gradient(circle at top, rgba(168, 85, 247, 0.12), transparent 52%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 245, 249, 0.94));
+}
+
+.badge-wallet-image {
+  width: auto;
+  max-width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+  border-radius: 0;
+}
+
+.badge-wallet-fallback {
+  width: min(100%, 240px);
+  padding: 1.25rem;
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  border-radius: 20px;
+  background: white;
+  text-align: center;
+}
+
+.badge-wallet-fallback-issuer {
   display: block;
-  color: var(--accent-secondary);
-  font-size: 0.72rem;
+  color: #475569;
+  font-size: 0.8rem;
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.65rem;
 }
 
-.cert-badge-name {
+.badge-wallet-fallback-name {
   display: block;
-  color: var(--text-primary);
-  font-size: 0.98rem;
-  line-height: 1.4;
+  color: #0f172a;
+  font-size: 1rem;
+  line-height: 1.35;
 }
 
-.cert-badge-meta {
+.badge-wallet-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.65rem 1.45rem 1.5rem;
+}
+
+.badge-wallet-name {
+  color: #0f172a;
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+
+.badge-wallet-issuer {
+  color: #334155;
+  font-size: 0.95rem;
+}
+
+.badge-wallet-meta {
   display: flex;
   gap: 0.55rem;
   flex-wrap: wrap;
-  margin-top: 0.6rem;
-  color: var(--text-secondary);
-  font-size: 0.8rem;
+  margin-top: 0.35rem;
+  color: #475569;
+  font-size: 0.88rem;
 }
 
 .cert-badge-status {
@@ -897,6 +962,15 @@ img {
   }
 
   .about-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .badge-wallet-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .badge-wallet-grid {
     grid-template-columns: 1fr;
   }
 

@@ -55,24 +55,6 @@ layout: default
 
       <section class="about-panel about-cert-panel">
         <h2 class="about-panel-title">Certificates</h2>
-        {% if site.featured_certifications and site.featured_certifications.size > 0 %}
-          <div class="cert-badge-list">
-            {% for cert in site.featured_certifications %}
-              <a class="cert-badge-panel{% if cert.color %} cert-badge-panel-{{ cert.color }}{% endif %}" href="{{ cert.url }}" target="_blank" rel="noreferrer">
-                <span class="cert-badge-issuer">{{ cert.issuer }}</span>
-                <strong class="cert-badge-name">{{ cert.name }}</strong>
-                <div class="cert-badge-meta">
-                  {% if cert.issued %}
-                    <span>Issued {{ cert.issued }}</span>
-                  {% endif %}
-                  {% if cert.status %}
-                    <span class="cert-badge-status">{{ cert.status }}</span>
-                  {% endif %}
-                </div>
-              </a>
-            {% endfor %}
-          </div>
-        {% endif %}
         {% if site.credly.profile_url != blank %}
           <p class="about-panel-text">
             Quan ly badge tren Credly va mo ho so cong khai. Trang nay chi can tro toi profile do, khong can upload tung cert vao source code.
@@ -90,4 +72,51 @@ layout: default
       </section>
     </aside>
   </div>
+
+  {% if site.featured_certifications and site.featured_certifications.size > 0 %}
+    <section class="about-panel badge-wallet-panel">
+      <div class="badge-wallet-header">
+        <div>
+          <p class="about-eyebrow">Certifications</p>
+          <h2 class="badge-wallet-title">Badge Wallet</h2>
+        </div>
+        {% if site.credly.profile_url != blank %}
+          <a class="about-action" href="{{ site.credly.profile_url }}" target="_blank" rel="noreferrer">Open Credly</a>
+        {% endif %}
+      </div>
+
+      <div class="badge-wallet-grid">
+        {% for cert in site.featured_certifications %}
+          <a class="badge-wallet-card" href="{{ cert.url }}" target="_blank" rel="noreferrer">
+            <div class="badge-wallet-media{% if cert.color %} badge-wallet-media-{{ cert.color }}{% endif %}">
+              {% if cert.image %}
+                <img class="badge-wallet-image" src="{{ cert.image }}" alt="{{ cert.name }} badge">
+              {% else %}
+                <div class="badge-wallet-fallback">
+                  <span class="badge-wallet-fallback-issuer">{{ cert.issuer }}</span>
+                  <strong class="badge-wallet-fallback-name">{{ cert.name }}</strong>
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="badge-wallet-body">
+              <h3 class="badge-wallet-name">{{ cert.name }}</h3>
+              <p class="badge-wallet-issuer">{{ cert.issuer }}</p>
+              <div class="badge-wallet-meta">
+                {% if cert.issued %}
+                  <span>Issued {{ cert.issued }}</span>
+                {% endif %}
+                {% if cert.expires %}
+                  <span>Expires {{ cert.expires }}</span>
+                {% endif %}
+                {% if cert.status %}
+                  <span class="cert-badge-status">{{ cert.status }}</span>
+                {% endif %}
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
 </article>
