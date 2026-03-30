@@ -1,5 +1,5 @@
 /* ============================================
-   CTF Blog — Dark Hacker Theme
+   ruouchuoihot's blog — Dark Defender Theme
    ============================================ */
 
 /* --- Fonts --- */
@@ -102,12 +102,29 @@ img {
 }
 
 .header-inner {
-  max-width: 900px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 1.3rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.menu-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .site-title {
@@ -167,11 +184,70 @@ img {
   width: 100%;
 }
 
+/* --- Layout Wrapper --- */
+.layout-wrapper {
+  display: flex;
+  flex: 1;
+  min-height: calc(100vh - 60px - 80px);
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border);
+  padding: 1.5rem 0;
+  overflow-y: auto;
+  position: sticky;
+  top: 60px;
+  height: calc(100vh - 60px);
+}
+
+.sidebar-section {
+  padding: 0 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-list {
+  list-style: none;
+}
+
+.sidebar-list li {
+  margin-bottom: 0.15rem;
+}
+
+.sidebar-list a {
+  display: block;
+  padding: 0.35rem 0.6rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.sidebar-list a:hover {
+  background: var(--accent-glow);
+  color: var(--accent);
+  text-shadow: none;
+}
+
 /* --- Main Content --- */
 .site-content {
   max-width: 900px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
+  padding: 2rem 2rem;
   flex: 1;
   width: 100%;
 }
@@ -269,10 +345,14 @@ img {
 }
 
 .post-category.web { background: rgba(0, 212, 255, 0.15); color: var(--accent-secondary); }
-.post-category.pwn { background: rgba(255, 71, 87, 0.15); color: var(--accent-danger); }
-.post-category.crypto { background: rgba(255, 107, 53, 0.15); color: var(--accent-warning); }
+.post-category.soc { background: rgba(0, 255, 136, 0.15); color: var(--accent); }
+.post-category.dfir { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
+.post-category.siem { background: rgba(234, 179, 8, 0.15); color: #eab308; }
 .post-category.forensics { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
-.post-category.reverse { background: rgba(234, 179, 8, 0.15); color: #eab308; }
+.post-category.threat-hunting { background: rgba(255, 107, 53, 0.15); color: var(--accent-warning); }
+.post-category.malware { background: rgba(255, 71, 87, 0.15); color: var(--accent-danger); }
+.post-category.network { background: rgba(0, 212, 255, 0.15); color: var(--accent-secondary); }
+.post-category.crypto { background: rgba(255, 107, 53, 0.15); color: var(--accent-warning); }
 .post-category.misc { background: rgba(148, 163, 184, 0.15); color: var(--text-secondary); }
 
 .post-title {
@@ -534,10 +614,27 @@ img {
 }
 
 /* --- Responsive --- */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -280px;
+    top: 60px;
+    height: calc(100vh - 60px);
+    z-index: 99;
+    transition: left 0.3s ease;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
   .header-inner {
-    flex-direction: column;
-    gap: 0.8rem;
+    flex-direction: row;
   }
 
   .site-nav {
@@ -554,6 +651,10 @@ img {
 
   .post-title {
     font-size: 1.1rem;
+  }
+
+  .site-content {
+    padding: 1.5rem 1rem;
   }
 
   .writeup-meta {

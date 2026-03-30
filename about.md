@@ -7,30 +7,35 @@ title: About
 
 ## 👋 Xin chào!
 
-Mình là **[Tên của bạn]**, một CTF player và security researcher.
+Mình là **ruouchuoihot**, một Blue Team enthusiast và SOC Analyst.
 
 Blog này là nơi mình chia sẻ:
-- 🏆 **CTF Writeups** — Giải thích chi tiết cách giải các challenge
-- 📚 **Kiến thức bảo mật** — Notes và tutorials về cyber security
-- 🔧 **Tools & Techniques** — Các công cụ và kỹ thuật hữu ích
+- 🛡️ **Defensive CTF Writeups** — Giải thích chi tiết cách giải các challenge Blue Team
+- 📚 **Kiến thức bảo mật** — SOC, SIEM, DFIR, Threat Hunting
+- 🔧 **Tools & Techniques** — Các công cụ và kỹ thuật phòng thủ
 
-## 🎯 CTF Teams & Achievements
+## 🎯 Focus Areas
 
-| Năm | CTF | Thành tích |
-|-----|-----|------------|
-| 2026 | Example CTF | Top 50 |
+- **SOC Operations** — Alert triage, investigation, escalation
+- **SIEM** — Splunk, ELK Stack, log analysis
+- **Digital Forensics & Incident Response (DFIR)** — Memory, disk, network forensics
+- **Threat Hunting** — Proactive detection, MITRE ATT&CK
+- **Malware Analysis** — Static & dynamic analysis
+- **Network Security** — IDS/IPS, traffic analysis
 
-## 🛠️ Skills
+## 🛠️ Toolset
 
-- **Web Exploitation**: SQL Injection, XSS, SSRF, Deserialization
-- **Binary Exploitation**: Buffer Overflow, ROP, Heap Exploitation
-- **Cryptography**: RSA, AES, Hash attacks
-- **Reverse Engineering**: IDA Pro, Ghidra, x86/x64 Assembly
-- **Forensics**: Wireshark, Volatility, Autopsy
+| Loại | Tools |
+|------|-------|
+| SIEM | Splunk, ELK, Wazuh |
+| Forensics | Volatility, FTK Imager, Autopsy |
+| Network | Wireshark, Suricata, Zeek |
+| Malware | YARA, Cuckoo, Any.Run |
+| Endpoint | Velociraptor, OSQuery |
+| Framework | MITRE ATT&CK, Cyber Kill Chain |
 
 ## 📫 Contact
 
-- GitHub: [github.com/your-username](https://github.com/your-username)
-- Email: your@email.com
+- GitHub: [github.com/ruouchuoihot](https://github.com/ruouchuoihot)
 
 </div>

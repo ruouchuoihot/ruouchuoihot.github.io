@@ -21,12 +21,68 @@
           <li><a href="{{ '/about' | relative_url }}">About</a></li>
         </ul>
       </nav>
+      <button class="menu-toggle" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
     </div>
   </header>
 
-  <main class="site-content">
-    {{ content }}
-  </main>
+  <div class="layout-wrapper">
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">📂 Categories</h3>
+        <ul class="sidebar-list">
+          <li><a href="{{ '/' | relative_url }}">🏠 Home</a></li>
+          <li><a href="{{ '/writeups' | relative_url }}">🏆 CTF Writeups</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">🛡️ Blue Team</h3>
+        <ul class="sidebar-list">
+          <li><a href="#">SOC Operations</a></li>
+          <li><a href="#">SIEM & Log Analysis</a></li>
+          <li><a href="#">Incident Response</a></li>
+          <li><a href="#">Threat Hunting</a></li>
+          <li><a href="#">Malware Analysis</a></li>
+          <li><a href="#">Digital Forensics</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">🔧 Tools & Infra</h3>
+        <ul class="sidebar-list">
+          <li><a href="#">Splunk / ELK</a></li>
+          <li><a href="#">Wireshark</a></li>
+          <li><a href="#">Volatility</a></li>
+          <li><a href="#">YARA Rules</a></li>
+          <li><a href="#">Suricata / Snort</a></li>
+          <li><a href="#">Velociraptor</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">📚 Knowledge</h3>
+        <ul class="sidebar-list">
+          <li><a href="#">MITRE ATT&CK</a></li>
+          <li><a href="#">Cyber Kill Chain</a></li>
+          <li><a href="#">Network Security</a></li>
+          <li><a href="#">Endpoint Security</a></li>
+          <li><a href="#">Cloud Security</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">🔗 Links</h3>
+        <ul class="sidebar-list">
+          <li><a href="https://github.com/{{ site.author.github }}" target="_blank">GitHub</a></li>
+          <li><a href="{{ '/about' | relative_url }}">About Me</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="site-content">
+      {{ content }}
+    </main>
+  </div>
 
   <footer class="site-footer">
     <p>
