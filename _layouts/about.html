@@ -39,32 +39,18 @@ layout: default
             <div class="badge-wallet-media{% if cert.color %} badge-wallet-media-{{ cert.color }}{% endif %}">
               {% if cert.embed_code %}
                 <div class="badge-wallet-embed">
-                  {{ cert.embed_code }}
+                  {{ cert.embed_code | replace: '<script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>', '' }}
                 </div>
               {% endif %}
             </div>
 
             <div class="badge-wallet-body">
               <h3 class="badge-wallet-name">{{ cert.name }}</h3>
-              <p class="badge-wallet-issuer">{{ cert.issuer }}</p>
-              <div class="badge-wallet-meta">
-                {% if cert.issued %}
-                  <span>Issued {{ cert.issued }}</span>
-                {% endif %}
-                {% if cert.expires %}
-                  <span>Expires {{ cert.expires }}</span>
-                {% endif %}
-                {% if cert.status %}
-                  <span class="cert-badge-status">{{ cert.status }}</span>
-                {% endif %}
-              </div>
-              {% if cert.url %}
-                <a class="badge-wallet-link" href="{{ cert.url }}" target="_blank" rel="noreferrer">View badge</a>
-              {% endif %}
             </div>
           </div>
         {% endfor %}
       </div>
+      <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
     </section>
   {% endif %}
 

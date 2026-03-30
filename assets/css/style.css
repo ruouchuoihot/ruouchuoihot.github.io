@@ -776,9 +776,9 @@ img {
 .badge-wallet-card {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  align-items: center;
   border: 1px solid rgba(148, 163, 184, 0.2);
-  border-radius: 18px;
+  border-radius: 16px;
   background: linear-gradient(180deg, rgba(248, 250, 252, 0.98), rgba(241, 245, 249, 0.96));
   color: #132238;
   overflow: hidden;
@@ -791,11 +791,12 @@ img {
 }
 
 .badge-wallet-media {
-  min-height: 130px;
+  min-height: 96px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem;
+  width: 100%;
+  padding: 0.35rem 0.5rem 0.2rem;
   background:
     radial-gradient(circle at top, rgba(15, 23, 42, 0.05), transparent 55%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.94));
@@ -832,6 +833,7 @@ img {
   align-items: center;
   justify-content: center;
   width: 100%;
+  min-height: 84px;
 }
 
 .badge-wallet-embed > div,
@@ -843,58 +845,19 @@ img {
 .badge-wallet-body {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  padding: 0.95rem 1rem 1rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  width: 100%;
+  padding: 0.35rem 0.7rem 0.75rem;
+  text-align: center;
 }
 
 .badge-wallet-name {
   color: #0f172a;
-  font-size: 0.95rem;
+  font-size: 0.78rem;
+  font-weight: 600;
   line-height: 1.35;
-}
-
-.badge-wallet-issuer {
-  color: #334155;
-  font-size: 0.82rem;
-}
-
-.badge-wallet-meta {
-  display: flex;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-  margin-top: 0.2rem;
-  color: #475569;
-  font-size: 0.76rem;
-}
-
-.badge-wallet-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 0.2rem;
-  width: fit-content;
-  padding: 0.45rem 0.75rem;
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.8);
-  color: #0f172a;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-}
-
-.badge-wallet-link:hover {
-  border-color: var(--accent-dim);
-  color: #0f172a;
-  text-shadow: none;
-}
-
-.cert-badge-status {
-  padding: 0.12rem 0.45rem;
-  border: 1px solid rgba(0, 255, 136, 0.25);
-  border-radius: 999px;
-  background: rgba(0, 255, 136, 0.08);
-  color: var(--accent);
-  font-family: var(--font-mono);
 }
 
 .about-mini-list {
