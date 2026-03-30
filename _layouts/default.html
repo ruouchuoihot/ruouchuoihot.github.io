@@ -59,15 +59,14 @@
                   <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
                 </li>
               {% endfor %}
-              {% assign ctf_hubs = site.posts | where_exp: "post", "post.tags contains 'ctf' or post.tags contains 'writeups'" %}
-              {% if ctf_hubs.size > 0 %}
-                <li class="tree-node tree-node-branch">
-                  <details class="tree-group">
-                    <summary class="tree-branch-label tree-branch-label-sub">
-                      <span class="tree-branch-link">CTF Hubs</span>
-                    </summary>
-                    <ul class="tree-children">
-                      {% for post in ctf_hubs %}
+              <li class="tree-node tree-node-branch">
+                <details class="tree-group">
+                  <summary class="tree-branch-label tree-branch-label-sub">
+                    <span class="tree-branch-link">CTF Hubs</span>
+                  </summary>
+                  <ul class="tree-children">
+                    {% for post in site.posts %}
+                      {% if post.tags contains 'ctf' or post.tags contains 'writeups' %}
                         <li class="tree-node">
                           {% if post.title == "CyberDefenders CTF Sync from Notion" %}
                             <a class="tree-link" href="{{ post.url | relative_url }}">CyberDefenders CTF</a>
@@ -75,11 +74,11 @@
                             <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
                           {% endif %}
                         </li>
-                      {% endfor %}
-                    </ul>
-                  </details>
-                </li>
-              {% endif %}
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </details>
+              </li>
               <li class="tree-node"><a class="tree-link" href="#">SOC Operations</a></li>
               <li class="tree-node"><a class="tree-link" href="#">Incident Response</a></li>
               <li class="tree-node"><a class="tree-link" href="#">Threat Hunting</a></li>
@@ -97,11 +96,11 @@
             </summary>
             <ul class="tree-children">
               {% for post in site.posts %}
-                {% unless post.title == "Splunk Note Sync from Notion" or post.title == "DevOps Note Sync from Notion" %}
-                <li class="tree-node">
-                  <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-                </li>
-                {% endunless %}
+                {% if post.title != "Splunk Note Sync from Notion" and post.title != "DevOps Note Sync from Notion" %}
+                  <li class="tree-node">
+                    <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                  </li>
+                {% endif %}
               {% endfor %}
             </ul>
           </details>
@@ -120,11 +119,12 @@
                     <span class="tree-branch-link">Splunk / ELK</span>
                   </summary>
                   <ul class="tree-children">
-                    {% assign splunk_posts = site.posts | where_exp: "post", "post.title == 'Splunk Note Sync from Notion' or post.tags contains 'splunk'" %}
-                    {% for post in splunk_posts %}
-                      <li class="tree-node">
-                        <a class="tree-link" href="{{ post.url | relative_url }}">Splunk</a>
-                      </li>
+                    {% for post in site.posts %}
+                      {% if post.title == "Splunk Note Sync from Notion" or post.tags contains 'splunk' %}
+                        <li class="tree-node">
+                          <a class="tree-link" href="{{ post.url | relative_url }}">Splunk</a>
+                        </li>
+                      {% endif %}
                     {% endfor %}
                   </ul>
                 </details>
@@ -145,11 +145,12 @@
               <span>Knowledge Base</span>
             </summary>
             <ul class="tree-children">
-              {% assign knowledge_posts = site.posts | where_exp: "post", "post.category == 'knowledge-base' or post.title == 'DevOps Note Sync from Notion'" %}
-              {% for post in knowledge_posts %}
-                <li class="tree-node">
-                  <a class="tree-link" href="{{ post.url | relative_url }}">DevOps</a>
-                </li>
+              {% for post in site.posts %}
+                {% if post.category == "knowledge-base" or post.title == "DevOps Note Sync from Notion" %}
+                  <li class="tree-node">
+                    <a class="tree-link" href="{{ post.url | relative_url }}">DevOps</a>
+                  </li>
+                {% endif %}
               {% endfor %}
               <li class="tree-node"><a class="tree-link" href="#">MITRE ATT&amp;CK</a></li>
               <li class="tree-node"><a class="tree-link" href="#">Cyber Kill Chain</a></li>
