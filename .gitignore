@@ -16,6 +16,8 @@ _site_preview_about_default/
 _site_preview_splunk_rewrite/
 _site_preview_splunk_cluster/
 _site_preview_splunk_cluster_2/
+_site_preview_splunk_import/
+_site_preview_splunk_import_2/
 http-serve.log
 http-serve.err.log
 jekyll-serve.log

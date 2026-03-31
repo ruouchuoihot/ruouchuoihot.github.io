@@ -162,6 +162,13 @@ The Splunk topics I want to continue expanding on this blog are:
 
 I will turn these into separate internal posts over time instead of keeping them only as raw Notion notes.
 
+## Related Splunk notes
+
+- [Using Splunk ES: Risk Framework, Security Domains va Investigation]({{ "/2026/03/31/using-splunk-es.html" | relative_url }})
+- [Splunk Fields va Data Models: Cach Doc Du Lieu Nhanh Hon]({{ "/2026/03/31/splunk-fields-and-data-models.html" | relative_url }})
+- [Data va Tools for Defense Analysts trong Splunk]({{ "/2026/03/31/data-and-tools-for-defense-analysts.html" | relative_url }})
+- [Splunk Dashboard Basics]({{ "/2026/03/31/splunk-dashboard-basics.html" | relative_url }})
+
 ## Notes
 
 This article is adapted from my original Notion notes for `Splunk note`, `Splunk ES`, `Splunk SOAR`, and `Splunk Security Essentials`, but rewritten here as a native blog entry so the Splunk section is useful even without opening Notion.
