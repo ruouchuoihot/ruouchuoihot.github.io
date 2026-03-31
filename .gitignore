@@ -13,6 +13,7 @@ _site_preview_fuller_writeups/
 _site_preview_assets/
 _site_preview_assets_2/
 _site_preview_about_default/
+_site_preview_splunk_rewrite/
 http-serve.log
 http-serve.err.log
 jekyll-serve.log
