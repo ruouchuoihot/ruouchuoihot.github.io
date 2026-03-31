@@ -215,9 +215,9 @@
                   </summary>
                   <ul class="tree-children">
                     {% for post in site.posts %}
-                      {% if post.title == "Splunk Note Sync from Notion" or post.tags contains 'splunk' %}
+                      {% if post.tags contains 'splunk' %}
                         <li class="tree-node">
-                          <a class="tree-link" href="{{ post.url | relative_url }}">Splunk</a>
+                          <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
                         </li>
                       {% endif %}
                     {% endfor %}
