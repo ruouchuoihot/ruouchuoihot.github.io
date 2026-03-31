@@ -29,6 +29,8 @@ This is a compact but realistic sequence:
 - User-Agent:
   `Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0`
 
+![Geo lookup that maps the attacking IP to Tianjin](/assets/images/cyberdefenders/webstrike/origin-city.png)
+
 ![HTTP stream showing the attacker user-agent](/assets/images/cyberdefenders/webstrike/user-agent.png)
 
 ### Web shell activity
@@ -39,11 +41,15 @@ This is a compact but realistic sequence:
 
 ![Double-extension web shell upload used to bypass validation](/assets/images/cyberdefenders/webstrike/web-shell-upload.png)
 
+![Execution path confirming the upload directory](/assets/images/cyberdefenders/webstrike/upload-directory.png)
+
 The attacker first attempted a simpler payload name, then shifted to a double-extension file to bypass validation.
 
 ### Data theft
 
 - File targeted for exfiltration: `passwd`
+
+![Traffic showing the attacker targeting passwd for exfiltration](/assets/images/cyberdefenders/webstrike/passwd-exfil.png)
 
 ## Analysis Walkthrough
 

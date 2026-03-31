@@ -43,6 +43,10 @@ From the session setup flow:
 - First pivot host: `SALES-PC`
 - Username: `ssales`
 
+![Session setup response revealing the compromised host context](/assets/images/cyberdefenders/psexec/host-context.png)
+
+![Authentication evidence showing the username used by the attacker](/assets/images/cyberdefenders/psexec/username.png)
+
 ### 3. Confirm PsExec deployment
 
 The service executable and shares in the notes are:
@@ -58,6 +62,8 @@ The service executable and shares in the notes are:
 The attacker then attempts to pivot toward:
 
 - `Marketing-PC`
+
+![Further SMB activity showing the next pivot target](/assets/images/cyberdefenders/psexec/next-pivot.png)
 
 ## Investigation Notes
 

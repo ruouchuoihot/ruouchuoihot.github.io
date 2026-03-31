@@ -41,6 +41,8 @@ Once valid access exists, the attacker enables:
 
 - `xp_cmdshell`
 
+![MSSQL command execution enabled through xp_cmdshell](/assets/images/cyberdefenders/bluesky/xp-cmdshell.png)
+
 This is the pivot point where the case moves from database access into full host compromise.
 
 ## Phase 2: Payload staging
@@ -55,6 +57,8 @@ The notes show a staged execution chain rather than a single one-shot payload:
 One of the important processes tied to the malicious activity is:
 
 - Injected process: `winlogon.exe`
+
+![Evidence of malware injection into winlogon.exe](/assets/images/cyberdefenders/bluesky/winlogon-injection.png)
 
 The first downloaded PowerShell scripts are:
 
@@ -92,6 +96,8 @@ Key artifacts from the notes:
 - Credential dumping script: `Invoke-PowerDump.ps1`
 - Dumped credential file: `hashes.txt`
 - Host discovery file: `extracted_hosts.txt`
+
+![Follow-on staging and post-exploitation activity from ichigo-lite.ps1](/assets/images/cyberdefenders/bluesky/ichigo-lite.png)
 
 This is where the case becomes much more serious. The attacker is no longer just running commands on one host. They are building the data needed to move further across the environment.
 

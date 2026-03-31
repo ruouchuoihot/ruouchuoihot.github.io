@@ -50,6 +50,8 @@ with origin city:
 
 ![Traffic evidence showing the attacker's IP in the SQL injection activity](/assets/images/cyberdefenders/web-investigation/attacker-ip.png)
 
+![AbuseIPDB-style lookup tying the source IP to Shijiazhuang](/assets/images/cyberdefenders/web-investigation/city-lookup.png)
+
 ### 2. Find the vulnerable endpoint
 
 The vulnerable PHP file is:
@@ -68,6 +70,8 @@ The notes walk through schema discovery and identify the user-related table:
 
 ![Database enumeration through SQL injection against INFORMATION_SCHEMA](/assets/images/cyberdefenders/web-investigation/database-enum.png)
 
+![Enumeration result exposing the customers table](/assets/images/cyberdefenders/web-investigation/customers-table.png)
+
 ### 4. Follow post-enumeration actions
 
 The hidden directory discovered is:
@@ -78,9 +82,13 @@ The credentials abused are:
 
 - `admin:admin123!`
 
+![Captured admin credentials used to log in](/assets/images/cyberdefenders/web-investigation/admin-login-creds.png)
+
 The uploaded malicious script is:
 
 - `NVri2vhp.php`
+
+![Uploaded PHP web shell used for server-side control](/assets/images/cyberdefenders/web-investigation/web-shell-upload.png)
 
 ## Investigation Notes
 

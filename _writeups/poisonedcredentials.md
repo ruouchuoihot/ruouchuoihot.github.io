@@ -50,6 +50,8 @@ By following the poisoned local resolution traffic, the rogue host is identified
 
 - `192.168.232.215`
 
+![Rogue responder answering poisoned name resolution requests](/assets/images/cyberdefenders/poisonedcredentials/rogue-ip.png)
+
 ### 3. Track the impacted clients
 
 The attack is not limited to one victim. The second host that receives poisoned responses is:
@@ -62,6 +64,10 @@ From the SMB and NTLM flow in the notes:
 
 - Compromised account: `janesmith`
 - Accessed host: `AccountingPC`
+
+![NTLM evidence showing the compromised account](/assets/images/cyberdefenders/poisonedcredentials/compromised-user.png)
+
+![SMB follow-on access to AccountingPC](/assets/images/cyberdefenders/poisonedcredentials/accounting-pc.png)
 
 The attack therefore moves from poisoned name resolution into usable internal access.
 

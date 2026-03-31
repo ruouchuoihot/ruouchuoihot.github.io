@@ -11,6 +11,7 @@ _site_preview_hubs_import/
 _site_preview_no_hubs/
 _site_preview_fuller_writeups/
 _site_preview_assets/
+_site_preview_assets_2/
 http-serve.log
 http-serve.err.log
 jekyll-serve.log
