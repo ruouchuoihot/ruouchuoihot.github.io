@@ -204,26 +204,6 @@
         <li class="tree-node tree-node-branch">
           <details class="tree-group" open>
             <summary class="tree-branch-label">
-              <span class="tree-icon" aria-hidden="true">&#128196;</span>
-              <span>Posts</span>
-            </summary>
-            <ul class="tree-children">
-              {% for post in site.posts %}
-                {% if post.title != "Splunk Note Sync from Notion" and post.title != "DevOps Note Sync from Notion" %}
-                  {% unless post.tags contains "hub" %}
-                    <li class="tree-node">
-                      <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-                    </li>
-                  {% endunless %}
-                {% endif %}
-              {% endfor %}
-            </ul>
-          </details>
-        </li>
-
-        <li class="tree-node tree-node-branch">
-          <details class="tree-group" open>
-            <summary class="tree-branch-label">
               <span class="tree-icon" aria-hidden="true">&#128736;</span>
               <span>Tools &amp; Infra</span>
             </summary>

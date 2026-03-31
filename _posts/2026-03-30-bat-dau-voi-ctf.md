@@ -3,6 +3,7 @@ title: "Blue Team CTF: Hướng dẫn cho người mới bắt đầu"
 date: 2026-03-30
 category: soc
 tags: [blue-team, ctf, beginner, defense]
+published: false
 ---
 
 Blue Team CTF (Defensive CTF) tập trung vào kỹ năng **phòng thủ** — phát hiện, phân tích, và ứng phó sự cố an ninh mạng, thay vì tấn công.
