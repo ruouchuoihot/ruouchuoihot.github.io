@@ -29,11 +29,15 @@ This is a compact but realistic sequence:
 - User-Agent:
   `Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0`
 
+![HTTP stream showing the attacker user-agent](/assets/images/cyberdefenders/webstrike/user-agent.png)
+
 ### Web shell activity
 
 - Uploaded shell name: `image.jpg.php`
 - Upload directory: `/reviews/uploads`
 - Port used by the shell: `8080`
+
+![Double-extension web shell upload used to bypass validation](/assets/images/cyberdefenders/webstrike/web-shell-upload.png)
 
 The attacker first attempted a simpler payload name, then shifted to a double-extension file to bypass validation.
 
@@ -79,4 +83,4 @@ The quickest way to solve this case is:
 
 ## Notes
 
-The original screenshots are still pending export into local blog assets.
+The main evidence screenshots from the original notes are now served from local blog assets.

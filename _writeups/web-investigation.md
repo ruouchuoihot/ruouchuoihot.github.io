@@ -48,6 +48,8 @@ with origin city:
 
 - `Shijiazhuang`
 
+![Traffic evidence showing the attacker's IP in the SQL injection activity](/assets/images/cyberdefenders/web-investigation/attacker-ip.png)
+
 ### 2. Find the vulnerable endpoint
 
 The vulnerable PHP file is:
@@ -63,6 +65,8 @@ and the first observed SQLi URI is:
 The notes walk through schema discovery and identify the user-related table:
 
 - `customers`
+
+![Database enumeration through SQL injection against INFORMATION_SCHEMA](/assets/images/cyberdefenders/web-investigation/database-enum.png)
 
 ### 4. Follow post-enumeration actions
 

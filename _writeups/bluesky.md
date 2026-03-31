@@ -28,10 +28,14 @@ That is what makes the challenge useful. It is not just one malicious file. It i
 
 The first clear signal in the traffic is scanning activity from `87.96.21.84`. The target host exposes several services, including MSSQL on `1433`, which becomes the attacker’s way in.
 
+![Port scanning against the victim host](/assets/images/cyberdefenders/bluesky/port-scan.png)
+
 From the TDS traffic in the PCAP, the recovered SQL access is:
 
 - Username: `sa`
 - Password: `cyb3rd3f3nd3r$`
+
+![Recovered MSSQL credentials from TDS traffic](/assets/images/cyberdefenders/bluesky/sql-login.png)
 
 Once valid access exists, the attacker enables:
 
@@ -142,4 +146,4 @@ That is why this case is best understood as a full intrusion, not just a malware
 
 ## Notes
 
-This writeup now carries the fuller analysis structure from my Notion notes. The screenshots still need a separate local asset export pass so the blog can host them permanently instead of relying on temporary Notion file links.
+This writeup now carries the fuller analysis structure from my Notion notes, with the key screenshots mirrored into local blog assets.

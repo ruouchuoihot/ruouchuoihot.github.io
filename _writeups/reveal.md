@@ -36,6 +36,8 @@ The notes use `windows.malfind` to identify:
 
 as the main process of interest.
 
+![Volatility malfind output highlighting the suspicious process](/assets/images/cyberdefenders/reveal/malfind.png)
+
 ### 2. Reconstruct process context
 
 The process tree and session context recover:
@@ -59,6 +61,8 @@ The execution pattern is mapped to:
 and the malware family identified is:
 
 - `StrelaStealer`
+
+![Threat intelligence result mapping the malware family to StrelaStealer](/assets/images/cyberdefenders/reveal/threatfox-strela.png)
 
 ## Why this mattered
 

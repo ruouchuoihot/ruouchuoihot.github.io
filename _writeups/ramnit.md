@@ -51,6 +51,10 @@ From the notes:
 - Compilation time: `2019-12-01 08:36:04`
 - Related domain: `dnsnb8.net`
 
+![Dumping the suspicious process from memory for validation](/assets/images/cyberdefenders/ramnit/dumpfiles.png)
+
+![Threat intelligence confirming the malicious sample and related domain](/assets/images/cyberdefenders/ramnit/virustotal-domain.png)
+
 ## Why the process stood out
 
 The key anomaly was not the process tree alone. It was the rare outbound connection owned by `ChromeSetup.exe`, combined with a path and hash that pointed to known malicious infrastructure.
@@ -67,4 +71,4 @@ The key anomaly was not the process tree alone. It was the rare outbound connect
 
 ## Notes
 
-The visual evidence from Notion still needs to be re-exported into local image assets.
+The validation screenshots in this post are now mirrored into local blog assets.

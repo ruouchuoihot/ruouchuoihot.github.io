@@ -34,6 +34,8 @@ The earliest meaningful SMB activity points back to:
 
 - `10.0.0.130`
 
+![Initial SMB activity that identifies the first compromised host](/assets/images/cyberdefenders/psexec/initial-access.png)
+
 ### 2. Recover host and account context
 
 From the session setup flow:
@@ -48,6 +50,8 @@ The service executable and shares in the notes are:
 - Service: `PSEXESVC.EXE`
 - Install share: `ADMIN$`
 - Communication share: `IPC$`
+
+![PsExec dropping the service executable over SMB](/assets/images/cyberdefenders/psexec/service-drop.png)
 
 ### 4. Track further movement
 

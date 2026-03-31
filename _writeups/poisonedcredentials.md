@@ -20,6 +20,8 @@ This challenge focuses on local name resolution abuse inside a Windows environme
 - Neither provides strong authentication for responses.
 - Attackers can poison these requests and capture hashes or relay credentials.
 
+![LLMNR and NBT-NS poisoning flow](/assets/images/cyberdefenders/poisonedcredentials/poisoning-diagram.png)
+
 This is why the case matters operationally: it starts from something that looks small and noisy, then turns into real credential abuse.
 
 ## Key Findings
@@ -37,6 +39,8 @@ This is why the case matters operationally: it starts from something that looks 
 The mistyped query in the notes is:
 
 - `fileshaare`
+
+![Mistyped hostname query that triggered the rogue response](/assets/images/cyberdefenders/poisonedcredentials/mistyped-query.png)
 
 That mistake is what creates the opening for the rogue responder.
 
@@ -78,4 +82,4 @@ The attack therefore moves from poisoned name resolution into usable internal ac
 
 ## Notes
 
-The full screenshot set from Notion still needs a dedicated local asset export step.
+The key screenshots for this case are now mirrored into local blog assets.
