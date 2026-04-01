@@ -8,7 +8,6 @@ tags: [cyberdefenders, sql-injection, web-forensics, enumeration, webshell]
 excerpt: "Phan tich SQL injection chain, enum database va web shell upload trong challenge Web Investigation."
 ---
 
-Imported and adapted from my original Notion notes for the CyberDefenders `Web Investigation` challenge.
 
 ## Scenario
 

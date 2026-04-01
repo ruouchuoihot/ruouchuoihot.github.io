@@ -8,7 +8,6 @@ tags: [cyberdefenders, llmnr, nbt-ns, credential-theft, smb]
 excerpt: "Dieu tra poisoning qua LLMNR/NBT-NS de xac dinh rogue host, tai khoan bi lo va may muc tieu."
 ---
 
-Imported and adapted from my original Notion notes for the CyberDefenders `PoisonedCredentials` challenge.
 
 ## Scenario
 

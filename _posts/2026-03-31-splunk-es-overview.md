@@ -6,7 +6,6 @@ tags: [splunk, siem, enterprise-security, detection, blue-team]
 excerpt: "Tong hop cac ghi chu ve Splunk Enterprise Security: correlation search, notable events, CIM, dashboard va incident workflow."
 ---
 
-Imported and adapted from my original Notion notes for `Splunk ES`.
 
 ## What Splunk ES is
 

@@ -6,7 +6,6 @@ tags: [splunk, siem, blue-team, soc, threat-intelligence]
 excerpt: "Tong hop cac nguon data va cong cu ma defense analyst dua vao khi lam viec voi Splunk: auth, proxy, AV, firewall, endpoint, CTI va metadata."
 ---
 
-This post is adapted from my Notion page `Data & tools for Defend Analysts`, but cleaned up into a more structured blog note.
 
 ## The SOC view of the stack
 

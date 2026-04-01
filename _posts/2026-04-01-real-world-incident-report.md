@@ -2,8 +2,7 @@
 layout: post
 title: "Real-world Incident Report"
 date: 2026-04-01
-categories: [dfir]
-tags: [dfir]
+categories: [dfir-knowledge]
 ---
 
 # **Real-world Incident Report**

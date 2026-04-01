@@ -6,7 +6,6 @@ tags: [splunk, siem, detection, soar, enterprise-security]
 excerpt: "Tong hop lai cac ghi chu Splunk thanh mot bai overview noi bo de hoc SIEM, Enterprise Security, SOAR va Security Essentials."
 ---
 
-This post is no longer just a pointer back to Notion. It is a cleaned-up internal overview of the Splunk topics I am actively learning and using for Blue Team work.
 
 ## Why Splunk matters in Blue Team
 

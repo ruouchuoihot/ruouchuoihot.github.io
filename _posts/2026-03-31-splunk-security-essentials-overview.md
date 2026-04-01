@@ -6,7 +6,6 @@ tags: [splunk, sse, detections, mitre, security-content]
 excerpt: "Tong hop ve Splunk Security Essentials: Security Data Journey, content library, data onboarding va roadmap detections."
 ---
 
-Imported and adapted from my original Notion notes for `Splunk Security Essentials (SSE)`.
 
 ## What SSE is
 

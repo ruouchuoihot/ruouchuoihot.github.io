@@ -180,6 +180,23 @@
                 </details>
               </li>
 
+              <li class="tree-node tree-node-branch">
+                <details class="tree-group" open>
+                  <summary class="tree-branch-label tree-branch-label-sub">
+                    <span class="tree-branch-link">DFIR</span>
+                  </summary>
+                  <ul class="tree-children">
+                    {% for post in site.posts %}
+                      {% if post.category == "dfir" or post.category == "forensics" %}
+                        <li class="tree-node">
+                          <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </details>
+              </li>
+
             </ul>
           </details>
         </li>
@@ -246,7 +263,7 @@
                   </summary>
                   <ul class="tree-children">
                     {% for post in site.posts %}
-                      {% if post.category == "dfir" or post.category == "forensics" %}
+                      {% if post.categories contains "dfir-knowledge" %}
                         <li class="tree-node">
                           <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
                         </li>

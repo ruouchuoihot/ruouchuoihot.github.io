@@ -2,8 +2,7 @@
 layout: post
 title: "Introduction (Incident Reporting)"
 date: 2026-04-01
-categories: [dfir]
-tags: [dfir]
+categories: [dfir-knowledge]
 ---
 
 ## Introduction to Security Incident Reporting

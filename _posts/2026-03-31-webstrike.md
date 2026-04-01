@@ -8,7 +8,6 @@ tags: [cyberdefenders, webshell, web-forensics, exfiltration, pcap]
 excerpt: "Theo doi web attack tu upload web shell den exfiltration trong challenge WebStrike."
 ---
 
-Imported and adapted from my original Notion notes for the CyberDefenders `WebStrike` challenge.
 
 ## Scenario
 

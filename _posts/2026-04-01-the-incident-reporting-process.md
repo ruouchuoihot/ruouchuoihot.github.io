@@ -2,8 +2,7 @@
 layout: post
 title: "The Incident Reporting Process"
 date: 2026-04-01
-categories: [dfir]
-tags: [dfir]
+categories: [dfir-knowledge]
 ---
 
 ## The Incident Reporting Process

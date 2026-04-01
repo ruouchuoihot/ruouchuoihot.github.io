@@ -6,7 +6,6 @@ tags: [splunk, soar, automation, incident-response, blue-team]
 excerpt: "Tong hop ve Splunk SOAR: tiep nhan event, enrich, phan tich, dua ra response decision va tu dong hoa hanh dong."
 ---
 
-Imported and adapted from my original Notion notes for `Splunk SOAR`.
 
 ## What Splunk SOAR is
 
