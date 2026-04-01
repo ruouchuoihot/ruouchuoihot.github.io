@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "a3934201a7a3670a",
+        "id": "cf168e9347d17004",
         "type": "tabs",
         "children": [
           {
-            "id": "412e8347e7b3de37",
+            "id": "c884d8180959887b",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_posts/2026-03-31-bluesky.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "2026-03-31-bluesky"
+              "title": "New tab"
             }
           }
         ]
@@ -135,40 +131,52 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "markdown-importer:Open format converter": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "templater-obsidian:Templater": false
     }
   },
-  "active": "412e8347e7b3de37",
+  "active": "025f9eebb80543d8",
   "lastOpenFiles": [
-    "Untitled.canvas",
-    "_posts/2026-03-31-baby-sql.md",
-    "_site/network/webstrike/index.html",
-    "_site/network/web-investigation/index.html",
-    "_site/network/webstrike",
-    "_site/network/web-investigation",
-    "_site/network",
-    "_site/malware/ramnit/index.html",
-    "_site/malware/ramnit",
-    "_site/malware",
-    "_site/soc/psexec/index.html",
-    "_site/soc/psexec",
+    "_site/devops/traefik/index.html",
+    "_site/devops/portainer/index.html",
+    "_site/devops/node-trong-swarm/index.html",
+    "_site/devops/docker-engine/index.html",
+    "_site/devops/devops-tools/index.html",
+    "_site/devops/cai-dat-docker-swarm/index.html",
+    "_site/devops/traefik",
+    "_site/devops/portainer",
+    "_site/devops/node-trong-swarm",
+    "_site/devops/docker-engine",
+    "_site/devops/devops-tools",
     "_site/assets/images/cyberdefenders/webstrike/web-shell-upload.png",
     "_site/assets/images/cyberdefenders/webstrike/user-agent.png",
     "_site/assets/images/cyberdefenders/webstrike/upload-directory.png",
     "_site/assets/images/cyberdefenders/webstrike/passwd-exfil.png",
-    "_site/assets/images/cyberdefenders/web-investigation/web-shell-upload.png",
     "_site/assets/images/cyberdefenders/webstrike/origin-city.png",
+    "_site/assets/images/cyberdefenders/web-investigation/web-shell-upload.png",
     "_site/assets/images/cyberdefenders/web-investigation/database-enum.png",
     "_site/assets/images/cyberdefenders/web-investigation/customers-table.png",
     "_site/assets/images/cyberdefenders/web-investigation/city-lookup.png",
     "_site/assets/images/cyberdefenders/web-investigation/attacker-ip.png",
+    "_site/Untitled.canvas",
+    "_site/Untitled 1.canvas",
+    "_posts/2026-04-01-devops-tools.md",
+    "_posts/2026-04-01-traefik.md",
+    "_posts/2026-04-01-node-trong-swarm.md",
+    "_posts/2026-04-01-portainer.md",
+    "_posts/2026-04-01-cai-dat-docker-swarm.md",
+    "_posts/2026-04-01-docker-engine.md",
+    "_posts/Untitled.md",
+    "Untitled 1.canvas",
+    "_posts/2026-03-31-bluesky.md",
+    "Untitled.canvas",
+    "_posts/2026-03-31-baby-sql.md",
     "_posts/2026-03-31-webstrike.md",
     "_posts/2026-03-31-web-investigation.md",
     "_posts/2026-03-31-reveal.md",
     "_posts/2026-03-31-ramnit.md",
     "_posts/2026-03-31-psexec.md",
     "_posts/2026-03-31-poisonedcredentials.md",
-    "_posts/2026-03-31-cryptohash.md",
-    "_posts/2026-03-31-bluesky.md"
+    "_posts/2026-03-31-cryptohash.md"
   ]
 }

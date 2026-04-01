@@ -240,13 +240,22 @@
               <span>Knowledge Base</span>
             </summary>
             <ul class="tree-children">
-              {% for post in site.posts %}
-                {% if post.category == "knowledge-base" or post.title == "DevOps Note Sync from Notion" %}
-                  <li class="tree-node">
-                    <a class="tree-link" href="{{ post.url | relative_url }}">DevOps</a>
-                  </li>
-                {% endif %}
-              {% endfor %}
+              <li class="tree-node tree-node-branch">
+                <details class="tree-group" open>
+                  <summary class="tree-branch-label">
+                    <span>DevOps</span>
+                  </summary>
+                  <ul class="tree-children">
+                    {% for post in site.posts %}
+                      {% if post.categories contains 'devops' %}
+                        <li class="tree-node">
+                          <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </details>
+              </li>
               <li class="tree-node"><a class="tree-link" href="#">MITRE ATT&amp;CK</a></li>
               <li class="tree-node"><a class="tree-link" href="#">Cyber Kill Chain</a></li>
               <li class="tree-node"><a class="tree-link" href="#">Network Security</a></li>
