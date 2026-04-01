@@ -5,45 +5,44 @@ ctf: "CyberDefenders"
 category: network
 difficulty: medium
 tags: [cyberdefenders, sql-injection, web-forensics, enumeration, webshell]
-excerpt: "Phan tich SQL injection chain, enum database va web shell upload trong challenge Web Investigation."
+excerpt: "Phân tích chuỗi SQL injection, enum dataabase và hành vi upload web shell trong challenge Web Investigation."
 ---
 
+## Kịch bản (Scenario)
 
-## Scenario
+Kẻ tấn công lạm dụng một endpoint search bằng PHP đang dính lỗ hổng để enum backend database, mò thông tin các thư mục ẩn, đánh cắp credential và cuối cùng mớm một đoạn script PHP độc hại lên server.
 
-The attacker abuses a vulnerable PHP search endpoint to enumerate the backend database, discover hidden directories, steal credentials, and finally upload a malicious PHP script.
+Thực chất đây là một thước phim cô đọng minh hoạ quá trình bẻ khóa hệ thống web (full web compromise) từ A đến Z:
 
-This is effectively a full web compromise story compressed into one capture:
+1. Dò ra lỗ hổng SQL injection.
+2. Enum Schema và Table.
+3. Cào thư mục ẩn.
+4. Lạm dụng Crendential.
+5. Ném Web shell.
 
-1. SQL injection discovery
-2. Schema and table enumeration
-3. Hidden directory discovery
-4. Credential abuse
-5. Web shell upload
-
-## Key Findings
+## Những phát hiện chính (Key Findings)
 
 - Attacker IP: `111.224.250.131`
-- Origin city: `Shijiazhuang`
-- Vulnerable script: `search.php`
-- First SQLi request:
+- Origin city (Thành phố xuất phát): `Shijiazhuang` (Thạch Gia Trang)
+- Nhắm vào script lỗi hổng: `search.php`
+- Cú SQLi đầu tiên:
   `/search.php?search=book%20and%201=1;%20--%20-`
-- Request used to enumerate databases:
+- Request dùng để enum dọn dẹp hệ cơ sở dữ liệu:
   `/search.php?search=book' UNION ALL SELECT NULL,CONCAT(0x7178766271,JSON_ARRAYAGG(CONCAT_WS(0x7a76676a636b,schema_name)),0x7176706a71) FROM INFORMATION_SCHEMA.SCHEMATA-- -`
-- Table containing website user data: `customers`
-- Hidden directory found by the attacker: `admin`
-- Credentials used to log in: `admin:admin123!`
-- Uploaded malicious script: `NVri2vhp.php`
+- Table chứa dữ liệu user của website: `customers`
+- Thư mục ẩn bị attacker mò ra: `admin`
+- Credential dùng để log in hốt ổ: `admin:admin123!`
+- Malicious script được thảy lên: `NVri2vhp.php`
 
-## Analysis Walkthrough
+## Phân tích chuyên sâu (Analysis Walkthrough)
 
-### 1. Identify the attacker and target
+### 1. Chỉ mặt Attacker và Target
 
-The attacking client recovered from the notes is:
+Từ note ghi chú, bới ra IP của khứa attacker:
 
 - `111.224.250.131`
 
-with origin city:
+Check location của IP thì về thẳng:
 
 - `Shijiazhuang`
 
@@ -51,19 +50,19 @@ with origin city:
 
 ![AbuseIPDB-style lookup tying the source IP to Shijiazhuang](/assets/images/cyberdefenders/web-investigation/city-lookup.png)
 
-### 2. Find the vulnerable endpoint
+### 2. Tìm trúng endpoint hớ hênh
 
-The vulnerable PHP file is:
+Cái phễu PHP thủng là file:
 
 - `search.php`
 
-and the first observed SQLi URI is:
+Và URI đầu tiên thả chui vô là:
 
 - `/search.php?search=book%20and%201=1;%20--%20-`
 
-### 3. Reconstruct the enumeration phase
+### 3. Tái hiện giai đoạn Enumeration
 
-The notes walk through schema discovery and identify the user-related table:
+Lần mò đường mòn mà attacker đi qua, ta phát hiện nó chọc vào schema và chốt được bảng chứa user:
 
 - `customers`
 
@@ -71,35 +70,35 @@ The notes walk through schema discovery and identify the user-related table:
 
 ![Enumeration result exposing the customers table](/assets/images/cyberdefenders/web-investigation/customers-table.png)
 
-### 4. Follow post-enumeration actions
+### 4. Lần theo các vệt Post-Enumeration
 
-The hidden directory discovered is:
+Thư mục ẩn lõi thòi lòi ra là:
 
 - `admin`
 
-The credentials abused are:
+Thông tin đăng nhập bị bợ đi:
 
 - `admin:admin123!`
 
 ![Captured admin credentials used to log in](/assets/images/cyberdefenders/web-investigation/admin-login-creds.png)
 
-The uploaded malicious script is:
+Mã độc thảy ngược lại server:
 
 - `NVri2vhp.php`
 
 ![Uploaded PHP web shell used for server-side control](/assets/images/cyberdefenders/web-investigation/web-shell-upload.png)
 
-## Investigation Notes
+## Các gạch đầu dòng khi điều tra (Investigation Notes)
 
-The case is a good example of a full web compromise workflow:
+Case này giống y chang một cuốn SGK mẫu về Web Compromise Workflow:
 
-1. SQL injection testing and database enumeration
-2. Table and column discovery
-3. Directory brute forcing
-4. Credential abuse against the admin area
-5. Web shell upload for persistent server-side control
+1. Test chọc SQL injection hòng moi Database.
+2. Truy xuất thẳng vô Table và Column.
+3. Quất Brute forcing băm thư mục.
+4. Xài cặp Credential đi loot đồ Admin.
+5. Quăng quả Web Shell để đóng chốt cắm cờ nằm lì bên trong.
 
-## Answer Matrix
+## Ma trận đáp án (Answer Matrix)
 
 - Attacker IP: `111.224.250.131`
 - City: `Shijiazhuang`

@@ -1,73 +1,73 @@
 ---
-title: "Splunk Fields va Data Models: Cach Doc Du Lieu Nhanh Hon"
+title: "Splunk Fields và Data Models: Cách Đọc Dữ Liệu Nhanh Hơn"
 date: 2026-03-31
 category: siem
 tags: [splunk, siem, fields, data-models, cim, blue-team]
-excerpt: "Ghi chu thuc hanh ve field, interesting field, field type, metadata browsing va data model trong Splunk."
+excerpt: "Ghi chú thực hành về field, interesting field, field type, metadata browsing và data model trong Splunk."
 ---
 
-This post combines my `Splunk Using Field` notes with the parts of `Data & tools for Defend Analysts` that are directly about exploring data inside Splunk.
+Bài này tôi nhào nặn lại mấy cái note `Splunk Using Field` chung với cái đoạn móc mớ data thực tế ở trỏng bài `Data & tools for Defend Analysts` luôn. Ngắn gọn là cách nhảy dạo coi data của mình đang sống ở ngõ ngách nào.
 
-## Why fields matter
+## Tại sao Fields lại đáng giá đến thế?
 
-When starting with Splunk, a lot of people focus only on the search bar. In practice, the speed of an investigation depends heavily on how well you understand fields.
+Mấy tay mới chạm vô Splunk y như rằng cứ dí mắt xói mòn vào thanh search bar. Thực ra, tốc độ phá án (tức tốc độ investigation) ngậm ngùi phụ thuộc phần trăm siêu to lớn vào việc người chơi hệ Splunk nắm rõ field (trường dữ liệu) đến cỡ nào.
 
-If the right fields are extracted and normalized, you can:
+Cứ extraction đúng và bung chuẩn normalized, anh em dư dả khả năng:
 
-- pivot faster
-- filter events more cleanly
-- aggregate results with less noise
-- map data into detections and data models later
+- Bẻ lái chuyển hướng (pivot) trong vòng bán kính nửa nốt nhạc
+- Filter gạn đục vớt trong bãi events sạch sẽ láng mướt
+- Aggregate nhào nặn kết quả chả dính một hột nhiễu rác
+- Gắn mạch mớ data sang detections siêu hạng hay dàn data models rắc rối sau này
 
-## Interesting fields
+## Giải phẫu Interesting Fields
 
-Splunk highlights `interesting fields` when they appear often enough in the result set and are likely to be useful for investigation.
+Có một trò khá mướt của Splunk là gắn biển báo `interesting fields` (Trường dữ liệu quan trọng) một khi thằng Splunk đánh hơi được nó ngụp lặn rải rác đủ liều lượng trong lượng data đổ ra và chắc cốp là nó hữu ích để ae bới lông tìm vết.
 
 ![Interesting fields in Splunk](/assets/images/splunk/using-field-interesting-fields.png)
 
-From my notes:
+Trích nôm na từ note:
 
-- these fields are the ones worth clicking first during triage
-- they help quickly identify the strongest pivots in the current result set
-- they reduce the time spent manually inspecting raw events line by line
+- Cứ vọc tay vô mấy trường này là ưu tiên số một lúc nhào vô triage (phân loại độ khẩn nổ alert) lẹ nhất.
+- Chúng chổng mông mách nước cho mấy trục xoay sở (strongest pivots) khỏe nhất trên đống mâm bát hiện hữu.
+- Hạ triệt để thời gian mỏi mắt cuốc bộ gõ line by line mò mẫm mớ text lềnh bềnh thô sơ raw events.
 
-This is especially useful when you are exploring unfamiliar data sources.
+Riêng món này mà bứng ra dùng trên mớ logs xa lạ mới tanh, quả rưỡi là ngon tuyệt.
 
-## String fields and numeric fields
+## Bảng hiệu String fields và Numeric fields
 
-Another small but practical note is how Splunk distinguishes different field types.
+Thêm một thủ thuật ruồi bu xíu nhưng thực chiến cực kỳ khi coi thằng Splunk dán biển phân biệt chủng loại:
 
 ![Field type indicators in Splunk](/assets/images/splunk/using-field-field-types.png)
 
-In the UI:
+Ngó bằng mắt UI:
 
-- `a` generally indicates string-oriented field values
-- `#` indicates numeric fields
+- `a` dán mác cho mấy gã chữ nghĩa kéo dây giá trị rặt hệ string (chuỗi).
+- `#` dẹp mác cho mấy khứa số lộn (tính giá trị numeric).
 
-That matters when deciding how to use the field in:
+Nhớ cho kỹ cái phân hóa này khi quyết ném chúng vô:
 
-- filtering
-- stats commands
-- visualizations
-- threshold logic
+- Trò filter rút cạn
+- Thống kê chằng chịt ngòi `stats` command
+- Mấy thanh biểu đồ Visualizations
+- Vẽ ra khối logic ngưỡng threshold để bật đèn đỏ bão
 
-## Expanding field details
+## Kéo giãn coi Field Details
 
-Clicking a field gives immediate context around its values and distribution.
+Búng tay click vô một field phọt luôn cái chân tướng của mớ distribution (phân bổ số lượng) với cả giá trị chả còn sót lại gì.
 
 ![Field detail panel in Splunk](/assets/images/splunk/using-field-field-details.png)
 
-This is one of the fastest ways to answer:
+Trò này là phao cứu sinh nhanh lẹ nhất để dội câu hỏi:
 
-- what values are common
-- which values are rare
-- whether the field is actually useful for pivoting
+- Thằng value nàoo hay ngóc đầu lên nhất
+- Value nào là quý hiểm (rare)
+- Thật sự thì ráp cái field này để quay trục móc ra nghi can có thơm ngon hay đắng nghét
 
-## Browsing hosts, sourcetypes, and sources
+## Dạo phố bằng Browsing Hosts, Sourcetypes, và Sources
 
-Before deep investigation, I like using metadata commands to understand what data even exists in the environment.
+Thú vui tao nhã trước lúc ôm súng nhào vô bùn đen là gọi thẳng `metadata commands` dạo một vòng kiểm đếm kho đạn: Biết mình biết hệ thống có rác gì.
 
-### Browsing hosts
+### Quét xem cái mâm Hosts
 
 ```spl
 | metadata type=hosts index=*
@@ -75,13 +75,13 @@ Before deep investigation, I like using metadata commands to understand what dat
 
 ![Browsing hosts with metadata](/assets/images/splunk/defense-analyst-browse-hosts.png)
 
-This helps answer:
+Bắn cái pằng phọt ra:
 
-- what hosts are sending data
-- which hosts look active
-- where additional investigation should start
+- Thằng ma nào đang nôn dữ liệu (hosts đang tống log)
+- Thằng nào đang gào thét khỏe ru
+- Nên khoanh chỗ nào để khui tiếp (investigation nhảy vào)
 
-### Browsing sourcetypes
+### Quét điểm mặt Sourcetypes
 
 ```spl
 | metadata type=sourcetypes index=*
@@ -89,9 +89,9 @@ This helps answer:
 
 ![Browsing sourcetypes with metadata](/assets/images/splunk/defense-analyst-browse-sourcetypes.png)
 
-This is useful for understanding log families across the environment.
+Cái mâm này bày ra toàn bộ thể thức log các hãng đổ về nhà mình.
 
-### Browsing sources
+### Quét tới chân ngọn ngách Sources
 
 ```spl
 | metadata type=sources index=*
@@ -99,27 +99,27 @@ This is useful for understanding log families across the environment.
 
 ![Browsing sources with metadata](/assets/images/splunk/defense-analyst-browse-sources.png)
 
-This gives more granular visibility into where events are coming from.
+Lòi ra cho anh em chèn rễ từng lỗ mũi của đống file quăng log trào lưu.
 
-## CIM and normalization
+## CIM (Common Information Model) - Thế lực mài nhãn Normalize
 
-`CIM` is one of the most important Splunk concepts for security work because it normalizes data into consistent structures.
+`CIM` có thể nói nôm na là đỉnh chóp ngòi nổ tối quan trọng của Splunk trong dân bảo mật vì rổ quy tắc gọt sạch data về nằm chung khuôn mẫu chung cấu trúc.
 
 ![Splunk CIM view](/assets/images/splunk/defense-analyst-cim.png)
 
-The big idea is simple:
+Sườn của cụ CIM rành rành ra:
 
-- different products log similar activity in different formats
-- CIM gives Splunk a shared model for those security-relevant events
-- detections and dashboards become easier to reuse once the data is normalized
+- Dăm ba cái hãng văng chung một mớ hoạt động tương đối ngang ngữ nhau nhưng văng bằng đủ cấu trúc giang hồ.
+- Bứt cái tay CIM thì ép thằng Splunk nén chung cục mô hình (shared model) cho cái bãi sự kiện rối mù đó.
+- Xài tới detection xịn mịn xắt tới dashboard là ăn trọn cú mượt mà. Đống lề nén sạch sành sanh chung một quy cũ thì cái gì cũng nhẹ đầu (portable).
 
-That is why field extraction quality matters so much upstream.
+Hiểu sao việc gọt đẽo khui móc chất lượng (Field extraction) lừ lừ đằng trước là siêu đắt.
 
-## Data models
+## Thế còn Data Models thì sao?
 
-Data models sit on top of normalized data and make security analysis easier to scale.
+Dàn hậu cần Data models nằm trễm chệ đè trên đám data gọt sẵn normalized, việc cào mớ phân tích an ninh đùn lên tới nóc ngọc hoàng chớp nháy nhanh gọn.
 
-My note captured this example:
+Ví dụ bỏ túi từ cái note cũ xì:
 
 ```spl
 | tstats summariesonly=true count from datamodel=Endpoint.Processes where Processes.user="*" Processes.process=* Processes.parent_process=* Processes.user="*" groupby _time span=1s Processes.process Processes.parent_process Processes.user | `drop_dm_object_name("Processes")`
@@ -127,20 +127,20 @@ My note captured this example:
 | sort + _time
 ```
 
-This is useful because:
+Rút thanh củi này ra đập vì:
 
-- `tstats` can be much faster than raw event searches
-- data models support repeatable analytics
-- CIM + data models make detection content more portable
+- Mã `tstats` chạy bằng điện vượt hàng chục ki-lô ngàn lần cách lết bò của search raw event thô.
+- Bằng cái data models rủng rỉnh này thì tha hồi dập theo kiểu lặp đi lặp lại ra analytics xịn.
+- CIM bắt cặp cùng Data Models bưng cục detection này rinh đem chỗ khác (portable) nướng ngon mướt.
 
-## Takeaway
+## Chốt gạch (Takeaway)
 
-For me, learning Splunk fields is not a beginner-only topic. It is foundational to everything else:
+Với tôi, ba cái mớ Fields không phải cái trò búng chỏ của đám mới vô nêm. Nó phải xem như gạch móng tạc dựng lên bệ chóp cho tất cả thể loại thao tác:
 
-- exploration
-- investigation
-- normalization
-- detections
-- dashboards
+- Bới coi (Exploration)
+- Đào hang bắt ếch (Investigation)
+- Nắn gọt đẽo (Normalization)
+- Tung gậy (Detections)
+- Trải bàn nhậu (Dashboards)
 
-If the field layer is messy, everything built on top of it becomes harder.
+Trường mà rác, nhắm mắt cắm đầu thì vứt trọn mấy thằng đứng trên tầng nóc. Khóc!

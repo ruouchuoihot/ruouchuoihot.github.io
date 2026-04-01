@@ -5,79 +5,78 @@ ctf: "CyberDefenders"
 category: threat-hunting
 difficulty: easy
 tags: [cyberdefenders, llmnr, nbt-ns, credential-theft, smb]
-excerpt: "Dieu tra poisoning qua LLMNR/NBT-NS de xac dinh rogue host, tai khoan bi lo va may muc tieu."
+excerpt: "Điều tra kỹ thuật poisoning qua LLMNR/NBT-NS để lần ra rogue host, tài khoản bị lộ và máy tính mục tiêu."
 ---
 
+## Kịch bản (Scenario)
 
-## Scenario
+Challenge này tập trung vào kẽ hở của cơ chế phân giải tên miền nội bộ (local name resolution) trong môi trường Windows. Một cỗ máy giả mạo (rogue machine) đứng ra phản hồi các request giả (poisoned traffic), thu thập thông tin đăng nhập (authentication attempts), rồi lấy chính cái access đó quay ra quật lại một host nội bộ khác.
 
-This challenge focuses on local name resolution abuse inside a Windows environment. A rogue machine answers poisoned resolution traffic, captures authentication attempts, and then uses the resulting access against another internal host.
+## Kiến thức cốt lõi (Core Concepts)
 
-## Core Concepts
-
-- `LLMNR` and `NBT-NS` are local name resolution protocols.
-- Neither provides strong authentication for responses.
-- Attackers can poison these requests and capture hashes or relay credentials.
+- `LLMNR` và `NBT-NS` là các giao thức phân giải tên nội bộ.
+- Nhược điểm chí mạng là chúng không có bảo mật xác thực chặt chẽ cho các response.
+- Attacker hoàn toàn có thể lắng nghe/đánh lừa (poison) các request này để bế luôn credential (hash) hoặc relay quyền đăng nhập.
 
 ![LLMNR and NBT-NS poisoning flow](/assets/images/cyberdefenders/poisonedcredentials/poisoning-diagram.png)
 
-This is why the case matters operationally: it starts from something that looks small and noisy, then turns into real credential abuse.
+Đây là lý do anh em làm SOC phải coi chừng cái case này: Nó bắt nguồn từ những mẩu traffic nhiễu thoạt nhìn rất bình thường nhưng lại đẻ ra lỗ hổng credential theft.
 
-## Key Findings
+## Những phát hiện chính (Key Findings)
 
-- Mistyped hostname query: `fileshaare`
+- Hostname bị gõ nhầm: `fileshaare`
 - Rogue machine IP: `192.168.232.215`
-- Second poisoned victim IP: `192.168.232.176`
-- Compromised username: `janesmith`
-- Host accessed through SMB: `AccountingPC`
+- Máy nạn nhân thứ 2 bị dính poison: `192.168.232.176`
+- User bị hack: `janesmith`
+- Host bị mò vào qua SMB: `AccountingPC`
 
-## Analysis Walkthrough
+## Phân tích chuyên sâu (Analysis Walkthrough)
 
-### 1. Find the triggering typo
+### 1. Dò tìm cú gõ phím lỗi
 
-The mistyped query in the notes is:
+Từ log, anh em sẽ bắt được ngay quả query "ngớ ngẩn" đầu tiên:
 
 - `fileshaare`
 
 ![Mistyped hostname query that triggered the rogue response](/assets/images/cyberdefenders/poisonedcredentials/mistyped-query.png)
 
-That mistake is what creates the opening for the rogue responder.
+Chính vì lỗi typo này mà hệ thống phân giải tên thất bại, và đó là thời cơ vàng để thằng rogue responder ngoi lên.
 
-### 2. Identify the rogue system
+### 2. Spot tên giả mạo (Identify the rogue system)
 
-By following the poisoned local resolution traffic, the rogue host is identified as:
+Lần theo luồng traffic name resolution bị poison, lù lù lòi ra quả IP giả mạo:
 
 - `192.168.232.215`
 
 ![Rogue responder answering poisoned name resolution requests](/assets/images/cyberdefenders/poisonedcredentials/rogue-ip.png)
 
-### 3. Track the impacted clients
+### 3. Trace các client bị ảnh hưởng
 
-The attack is not limited to one victim. The second host that receives poisoned responses is:
+Cuộc tấn công không giới hạn ở một máy dính bẫy. Host thứ 2 nhận được câu trả lời giả mạo từ hệ thống là:
 
 - `192.168.232.176`
 
-### 4. Confirm credential abuse
+### 4. Xác nhận lạm dụng Credential
 
-From the SMB and NTLM flow in the notes:
+Bới luồng SMB và NTLM, ta túm được:
 
-- Compromised account: `janesmith`
-- Accessed host: `AccountingPC`
+- Dấu vết tài khoản bị xâm phạm: `janesmith`
+- Máy đã bị bò vào: `AccountingPC`
 
 ![NTLM evidence showing the compromised account](/assets/images/cyberdefenders/poisonedcredentials/compromised-user.png)
 
 ![SMB follow-on access to AccountingPC](/assets/images/cyberdefenders/poisonedcredentials/accounting-pc.png)
 
-The attack therefore moves from poisoned name resolution into usable internal access.
+Nước đi hoàn hảo từ lúc poison name resolution cho tới lúc lấy được internal access.
 
-## Detection Ideas
+## Ý tưởng phát hiện (Detection Ideas)
 
-- Alert on unusual LLMNR/NBT-NS responders on user VLANs
-- Disable LLMNR and NBT-NS where possible
-- Hunt for outbound SMB sessions following recent poisoned resolution traffic
-- Look for repeated authentication attempts immediately after multicast name queries
+- Tạo alert cho các LLMNR/NBT-NS responder mờ ám trên các vLAN của user.
+- Tắt cụ LLMNR và NBT-NS luôn nếu policy của tổ chức cho phép.
+- Tìm kiếm (Hunt) các outbound SMB session ngay sau những cú poisoned resolution traffic.
+- Soi các failed authentication attempts liên tục đằng sau mớ multicast name queries.
 
-## Answer Matrix
+## Ma trận đáp án (Answer Matrix)
 
 - Mistyped query: `fileshaare`
 - Rogue IP: `192.168.232.215`
@@ -85,6 +84,6 @@ The attack therefore moves from poisoned name resolution into usable internal ac
 - Compromised account: `janesmith`
 - Accessed host: `AccountingPC`
 
-## Notes
+## Ghi chú
 
-The key screenshots for this case are now mirrored into local blog assets.
+Nguyên bộ screenshot mấu chốt của case này đã được đẩy thẳng vô local blog cho anh em dễ theo dõi.
