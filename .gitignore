@@ -30,3 +30,9 @@ jekyll-serve.err.log
 *~
 .DS_Store
 Thumbs.db
+
+# Obsidian config to ignore
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/graph.json
+.obsidian/backlink-cache.json
