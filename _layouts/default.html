@@ -67,10 +67,10 @@
                         </li>
                       {% endif %}
                     {% endfor %}
-                    {% for writeup in site.writeups %}
-                      {% if writeup.ctf contains "CyberDefenders" %}
+                    {% for post in site.posts %}
+                      {% if post.ctf contains "CyberDefenders" %}
                         <li class="tree-node">
-                          <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+                          <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
                         </li>
                       {% endif %}
                     {% endfor %}
@@ -84,10 +84,10 @@
                     <span class="tree-branch-link">Blue Team Labs Online</span>
                   </summary>
                   <ul class="tree-children">
-                    {% for writeup in site.writeups %}
-                      {% if writeup.ctf contains "Blue Team Labs Online" %}
+                    {% for post in site.posts %}
+                      {% if post.ctf contains "Blue Team Labs Online" %}
                         <li class="tree-node">
-                          <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+                          <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
                         </li>
                       {% endif %}
                     {% endfor %}
@@ -101,10 +101,10 @@
                     <span class="tree-branch-link">Hack The Box</span>
                   </summary>
                   <ul class="tree-children">
-                    {% for writeup in site.writeups %}
-                      {% if writeup.ctf contains "Hack The Box" or writeup.ctf contains "HTB" %}
+                    {% for post in site.posts %}
+                      {% if post.ctf contains "Hack The Box" or post.ctf contains "HTB" %}
                         <li class="tree-node">
-                          <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+                          <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
                         </li>
                       {% endif %}
                     {% endfor %}
@@ -118,10 +118,10 @@
                     <span class="tree-branch-link">SOC Operations</span>
                   </summary>
                   <ul class="tree-children">
-                    {% for writeup in site.writeups %}
-                      {% if writeup.category == "soc" %}
+                    {% for post in site.posts %}
+                      {% if post.category == "soc" %}
                         <li class="tree-node">
-                          <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+                          <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
                         </li>
                       {% endif %}
                     {% endfor %}
@@ -135,10 +135,10 @@
                     <span class="tree-branch-link">Incident Response</span>
                   </summary>
                   <ul class="tree-children">
-                    {% for writeup in site.writeups %}
-                      {% if writeup.category == "incident-response" %}
+                    {% for post in site.posts %}
+                      {% if post.category == "incident-response" %}
                         <li class="tree-node">
-                          <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+                          <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
                         </li>
                       {% endif %}
                     {% endfor %}
@@ -152,10 +152,10 @@
                     <span class="tree-branch-link">Threat Hunting</span>
                   </summary>
                   <ul class="tree-children">
-                    {% for writeup in site.writeups %}
-                      {% if writeup.category == "threat-hunting" %}
+                    {% for post in site.posts %}
+                      {% if post.category == "threat-hunting" %}
                         <li class="tree-node">
-                          <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+                          <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
                         </li>
                       {% endif %}
                     {% endfor %}
@@ -169,10 +169,10 @@
                     <span class="tree-branch-link">Malware Analysis</span>
                   </summary>
                   <ul class="tree-children">
-                    {% for writeup in site.writeups %}
-                      {% if writeup.category == "malware" %}
+                    {% for post in site.posts %}
+                      {% if post.category == "malware" %}
                         <li class="tree-node">
-                          <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+                          <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
                         </li>
                       {% endif %}
                     {% endfor %}
@@ -186,10 +186,10 @@
                     <span class="tree-branch-link">Digital Forensics</span>
                   </summary>
                   <ul class="tree-children">
-                    {% for writeup in site.writeups %}
-                      {% if writeup.category == "dfir" or writeup.category == "forensics" %}
+                    {% for post in site.posts %}
+                      {% if post.category == "dfir" or post.category == "forensics" %}
                         <li class="tree-node">
-                          <a class="tree-link" href="{{ writeup.url | relative_url }}">{{ writeup.title }}</a>
+                          <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
                         </li>
                       {% endif %}
                     {% endfor %}

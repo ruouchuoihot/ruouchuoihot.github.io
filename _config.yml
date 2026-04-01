@@ -62,10 +62,7 @@ plugins:
   - jekyll-sitemap
 
 # Collections
-collections:
-  writeups:
-    output: true
-    permalink: /writeups/:title/
+# (No custom collections needed since we use posts)
 
 # Defaults
 defaults:
@@ -74,11 +71,6 @@ defaults:
       type: "posts"
     values:
       layout: "post"
-  - scope:
-      path: ""
-      type: "writeups"
-    values:
-      layout: "writeup"
 
 # Exclude from build
 exclude:
