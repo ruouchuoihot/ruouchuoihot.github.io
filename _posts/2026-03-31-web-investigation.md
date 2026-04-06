@@ -5,7 +5,7 @@ ctf: "CyberDefenders"
 category: network
 difficulty: medium
 tags: [cyberdefenders, sql-injection, web-forensics, enumeration, webshell]
-excerpt: "Phân tích chuỗi SQL injection, enum dataabase và hành vi upload web shell trong challenge Web Investigation."
+excerpt: "Phân tích chuỗi SQL injection, enum database và hành vi upload web shell trong challenge Web Investigation."
 ---
 
 ## Kịch bản (Scenario)
@@ -31,14 +31,14 @@ Thực chất đây là một thước phim cô đọng minh hoạ quá trình b
   `/search.php?search=book' UNION ALL SELECT NULL,CONCAT(0x7178766271,JSON_ARRAYAGG(CONCAT_WS(0x7a76676a636b,schema_name)),0x7176706a71) FROM INFORMATION_SCHEMA.SCHEMATA-- -`
 - Table chứa dữ liệu user của website: `customers`
 - Thư mục ẩn bị attacker mò ra: `admin`
-- Credential dùng để log in hốt ổ: `admin:admin123!`
+- Credential dùng để đăng nhập: `admin:admin123!`
 - Malicious script được thảy lên: `NVri2vhp.php`
 
 ## Phân tích chuyên sâu (Analysis Walkthrough)
 
 ### 1. Chỉ mặt Attacker và Target
 
-Từ note ghi chú, bới ra IP của khứa attacker:
+Từ ghi chú, xác định được IP của attacker:
 
 - `111.224.250.131`
 
@@ -52,17 +52,17 @@ Check location của IP thì về thẳng:
 
 ### 2. Tìm trúng endpoint hớ hênh
 
-Cái phễu PHP thủng là file:
+File PHP có lỗ hổng:
 
 - `search.php`
 
-Và URI đầu tiên thả chui vô là:
+URI đầu tiên được sử dụng để khai thác:
 
 - `/search.php?search=book%20and%201=1;%20--%20-`
 
 ### 3. Tái hiện giai đoạn Enumeration
 
-Lần mò đường mòn mà attacker đi qua, ta phát hiện nó chọc vào schema và chốt được bảng chứa user:
+Theo dõi các bước của attacker, ta phát hiện attacker enum schema database và xác định được bảng chứa thông tin user:
 
 - `customers`
 
@@ -72,17 +72,17 @@ Lần mò đường mòn mà attacker đi qua, ta phát hiện nó chọc vào s
 
 ### 4. Lần theo các vệt Post-Enumeration
 
-Thư mục ẩn lõi thòi lòi ra là:
+Thư mục ẩn bị phát hiện:
 
 - `admin`
 
-Thông tin đăng nhập bị bợ đi:
+Credential bị đánh cắp:
 
 - `admin:admin123!`
 
 ![Captured admin credentials used to log in](/assets/images/cyberdefenders/web-investigation/admin-login-creds.png)
 
-Mã độc thảy ngược lại server:
+Malicious script được upload lên server:
 
 - `NVri2vhp.php`
 
@@ -90,13 +90,13 @@ Mã độc thảy ngược lại server:
 
 ## Các gạch đầu dòng khi điều tra (Investigation Notes)
 
-Case này giống y chang một cuốn SGK mẫu về Web Compromise Workflow:
+Case này là một ví dụ điển hình về Web Compromise Workflow:
 
-1. Test chọc SQL injection hòng moi Database.
-2. Truy xuất thẳng vô Table và Column.
-3. Quất Brute forcing băm thư mục.
-4. Xài cặp Credential đi loot đồ Admin.
-5. Quăng quả Web Shell để đóng chốt cắm cờ nằm lì bên trong.
+1. Khai thác SQL injection để truy vấn database.
+2. Enum table và column.
+3. Brute force thư mục ẩn.
+4. Sử dụng credential thu được để đăng nhập admin.
+5. Upload web shell để duy trì quyền truy cập (persistence).
 
 ## Ma trận đáp án (Answer Matrix)
 

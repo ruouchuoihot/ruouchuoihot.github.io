@@ -91,7 +91,7 @@ Logs kiểu này quăng ra mặt:
 
 - Signal khớp với malware signature
 - Lịch sử quarantine (cách ly) hay remediation
-- Điểm tên mấy file hoặc hash hắc ám
+- Xác định các file hoặc hash độc hại
 - Phác họa rành rành dòng thời gian máy nạn nhân bị lây nhiễm
 
 ### Firewall và Network Controls

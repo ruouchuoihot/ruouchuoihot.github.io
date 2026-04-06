@@ -5,25 +5,25 @@ ctf: "CyberDefenders"
 category: network
 difficulty: easy
 tags: [cyberdefenders, webshell, web-forensics, exfiltration, pcap]
-excerpt: "Lần theo dấu vết web attack từ khâu upload web shell đến lúc exfiltration tẩu tán data trong lab WebStrike."
+excerpt: "Phân tích dấu vết web attack từ khâu upload web shell đến exfiltration data trong lab WebStrike."
 ---
 
 ## Kịch bản (Scenario)
 
-Bản PCAP bắt trọn khoảnh khắc một Web server đang bị dập tơi bời. Attacker ném lên một file web shell, dùng nó làm cửa hậu gõ lệnh, rồi ngoạm data nhạy cảm chuẩn bị mang tuồn (exfiltrate) ra ngoài.
+Bản PCAP ghi lại toàn bộ quá trình một Web server bị tấn công. Attacker upload một file web shell, dùng nó làm backdoor để thực thi command, sau đó exfiltrate data nhạy cảm ra ngoài.
 
-Nhấn gọn nhưng cực kỳ thực dụng:
+Tóm lại chuỗi tấn công gồm:
 
-1. Tải mồi nhử độc hại (Malicious upload).
-2. Chiếm quyền điều khiển thực thi qua đường file upload.
-3. Thả các luồng request tương tác tiếp theo.
-4. Đẩy ngược data tẩu tán.
+1. Upload file độc hại (Malicious upload).
+2. Chiếm quyền thực thi qua đường file upload.
+3. Gửi các request tương tác tiếp theo.
+4. Exfiltrate data ra ngoài.
 
 ## Những phát hiện chính (Key Findings)
 
 ### Profile Attacker
 
-- Tọa độ xuất phát: `Tianjin` (Thiên Tân)
+- Vị trí địa lý: `Tianjin` (Thiên Tân)
 - User-Agent:
   `Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0`
 
@@ -31,50 +31,50 @@ Nhấn gọn nhưng cực kỳ thực dụng:
 
 ![HTTP stream showing the attacker user-agent](/assets/images/cyberdefenders/webstrike/user-agent.png)
 
-### Săm soi lại hoạt động Web Shell
+### Phân tích Web Shell
 
-- Tên file shell mớm lên: `image.jpg.php`
-- Đỉnh điểm nằm ở thư mục: `/reviews/uploads`
-- Port bị gắn họng hút do shell đẩy vào: `8080`
+- Tên file shell được upload: `image.jpg.php`
+- Thư mục chứa shell: `/reviews/uploads`
+- Port mà shell sử dụng: `8080`
 
 ![Double-extension web shell upload used to bypass validation](/assets/images/cyberdefenders/webstrike/web-shell-upload.png)
 
 ![Execution path confirming the upload directory](/assets/images/cyberdefenders/webstrike/upload-directory.png)
 
-Kẻ tấn công ban đầu vờ đặt cái tên payload rõ hiền, sau đó lắc lươn chuyển sang ngón nghề double-extension (tên có 2 đuôi) để đâm lủng cái hàng rào validation.
+Attacker sử dụng kỹ thuật double-extension (đặt tên file có 2 phần mở rộng) để bypass cơ chế validation của server.
 
-### Đánh cắp dữ liệu
+### Exfiltration
 
-- File nằm trong danh sách bế đi: `passwd`
+- File bị nhắm tới: `passwd`
 
 ![Traffic showing the attacker targeting passwd for exfiltration](/assets/images/cyberdefenders/webstrike/passwd-exfil.png)
 
 ## Phân tích chuyên sâu (Analysis Walkthrough)
 
-### 1. Phác thảo Attacker Profile
+### 1. Xác định Attacker Profile
 
-Chỉ cần soi sơ luồng HTTP stream là lòi ra User-agent và lần theo IP là ra cái nguồn gốc địa lý dính đến kẻ tấn công.
+Kiểm tra HTTP stream để lấy User-Agent, sau đó tra IP để xác định vị trí địa lý của attacker.
 
-### 2. Focus vào luồng thư mục Uploads
+### 2. Phân tích luồng Upload
 
-Lọc thẳng request `POST`, soi thật nhanh hành vi upload là thấy cấn ngay. Lão này định dùng loại file phổ thông nhưng gặp khó nên mới dùng chiêu ném `image.jpg.php` để luồn qua khe giới hạn filter.
+Filter request `POST` để tìm hành vi upload. Attacker ban đầu thử upload file thông thường nhưng bị chặn, sau đó chuyển sang kỹ thuật double-extension với file `image.jpg.php` để vượt qua filter.
 
-### 3. Định hình lại Excecution Path
+### 3. Xác định Execution Path
 
-Khi soi cái đường dẫn `/reviews/uploads`, ta biết tỏng đây là cái kho cất đồ upload mà app chỉ định sẵn. Nước sau đó, attacker cứ rình chọt vào đây gõ tới.
+Thư mục `/reviews/uploads` là nơi ứng dụng lưu file upload. Attacker truy cập shell từ thư mục này để thực thi command.
 
-### 4. Tracking Command và hành vi Exfiltration
+### 4. Tracking Command và Exfiltration
 
-Traffic dính dáng đến file shell cho thấy attacker cắm vòi hút vào port `8080` và nỗ lực cấu trúc file `passwd`, khẳng định 100% đây là chuỗi "hậu upload" chứ không phải màn kịch lỗi upload.
+Traffic liên quan đến web shell cho thấy attacker kết nối qua port `8080` và truy cập file `passwd`, xác nhận đây là chuỗi hành vi post-exploitation chứ không phải lỗi upload thông thường.
 
-## Các lệnh rà soát khi điều tra (Investigation Notes)
+## Ghi chú điều tra (Investigation Notes)
 
-Nhanh gọn lẹ để triệt phá cái case này:
+Các bước chính để phân tích case này:
 
-1. Filter bằng `POST` để túm luồng upload ảnh/file.
-2. Dò theo mạch Request & Response cho bằng được cái shell.
-3. Check coi có cha nào command liên đới nổ từ C2 server thông diễn qua con shell hay không.
-4. Review toàn cảnh Outbound traffic coi có file nào bị bế đi lọt đường chưa.
+1. Filter `POST` request để xác định luồng upload.
+2. Theo dõi Request & Response liên quan đến web shell.
+3. Kiểm tra xem có command nào được thực thi thông qua shell không.
+4. Review outbound traffic để xác định file bị exfiltrate.
 
 ## Ma trận đáp án (Answer Matrix)
 
@@ -84,7 +84,3 @@ Nhanh gọn lẹ để triệt phá cái case này:
 - Upload directory: `/reviews/uploads`
 - Web shell port: `8080`
 - Exfiltrated file target: `passwd`
-
-## Ghi chú
-
-Bản writeup này hiện đã áp dụng cấu trúc phân tích đầy đủ và đồng bộ ảnh tĩnh về cục máy local block.
