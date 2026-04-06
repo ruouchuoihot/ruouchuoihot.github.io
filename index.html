@@ -31,7 +31,6 @@ permalink: /
   {% for post in site.posts limit:15 %}
   <li class="post-item">
     <div class="post-meta">
-      <span class="post-date">{{ post.date | date: "%d/%m/%Y" }}</span>
       {% if post.ctf %}<span>🏆 {{ post.ctf }}</span>{% endif %}
       {% if post.category %}
       <span class="post-category {{ post.category | downcase }}">{{ post.category }}</span>
