@@ -3,200 +3,170 @@ title: "CafePoisoning"
 date: 2026-04-03
 ctf: "Hack The Box"
 category: forensics
-difficulty: easy
 tags: [hack-the-box, htb, dfir, wireshark, network-forensics, arp-poisoning]
-excerpt: "Phân tích pcapng và triage artifact để bóc tách luồng tấn công ARP poisoning, chặn đứng DNS spoofing và truy vết C2 qua Wireshark."
 ---
 
-![CafePoisoning](/assets/images/htb/cafepoisoning/527d2172-92a8-48dd-b0b7-ae8f16cb8857.png)
+![](/assets/images/htb/cafepoisoning/527d2172-92a8-48dd-b0b7-ae8f16cb8857.png " =324x120")
 
-## Kịch bản (Scenario)
+## Scenario
 
-**Trong lúc rẽ vào quán cafe làm ly đen đá, tôi tiện tay cắm vào mạng Wi-Fi công cộng để update Windows. Đen cái là tiến trình update chạy mãi không xong, cứ treo lơ lửng. Dưới góc độ của một tay DFIR chuyên nghiệp, vào cuộc check thử xem chuyện gì đang xảy ra dưới lớp network.**
+**While grabbing coffee at a cafe, I connected to public Wi-Fi and started a Windows update. The process never completed—it just kept running. As a digital forensics expert, can you help investigate?**
 
 > Tag: DFIR
 
-Challenge cung cấp:
-- 1 file `pcapng`
-- 1 thư mục Triage của máy nạn nhân: `DESKTOP-TIT3D2T`
+Challanges File:
 
-![Triage Folder](/assets/images/htb/cafepoisoning/abcd13cf-fbb3-422c-8322-03058de69a17.png)
+* 1 File pcapng
+* 1 Folder Triage `DESKTOP-TIT3D2T`
 
----
+  ![](/assets/images/htb/cafepoisoning/abcd13cf-fbb3-422c-8322-03058de69a17.png " =244x77")
 
-## Phân tích Chuyên sâu (Walkthrough)
+## Challanges
 
-### 1. Dò tìm dấu vết Discovery Scan của kẻ tấn công
+### 1. **The attacker performed a host discovery scan to identify devices on the network. Provide the start time of this activity in UTC.**
 
-> The attacker performed a host discovery scan to identify devices on the network. Provide the start time of this activity in UTC.
+* Filter các gói ARP trong file pcapng, bắt đầu từ mốc thời gian `2025-03-10 21:07:05` có 1 loạt các gói broadcast ARP từ source devx-corp.net
 
-Mở Wireshark, tôi filter thẳng vào các gói tin ARP. Rà lại file pcapng, bắt đầu từ mốc thời gian `2025-03-10 21:07:05`, ghi nhận một loạt các gói broadcast ARP nổ ra liên tục từ source `devx-corp.net`. Đây là dấu hiệu rành rành của trò ping sweep / arp scan để dựng bản đồ mạng nội bộ.
+  ![](/assets/images/htb/cafepoisoning/c1b6a3b8-5582-4279-ab58-c3a2d8daab6a.png " =1202x548")
 
-![ARP Scan Discovery](/assets/images/htb/cafepoisoning/c1b6a3b8-5582-4279-ab58-c3a2d8daab6a.png)
-
-```
+```none
 2025-03-10 21:07:05
 ```
 
-### 2. Xác định thời điểm ARP Poisoning phát nổ
+### 2. **The attacker launched an ARP poisoning attack. Provide the start time in UTC**
 
-> The attacker launched an ARP poisoning attack. Provide the start time in UTC.
+* ARP poisoning thường xảy ra do attacker tạo ARP reply request giả để gán 1 IP của gateway hoặc victim với MAC của attacker => Network của victim cập nhật ARP table sai dẫn đến các gói tin giao tiếp sẽ bị man in the middle.
+* Dấu hiệu detect bằng wireshark:
+  * 1 IP xuất hiện với 2 MAC khác nhau trong gói ARP reply (opcode 2)
+  * Lượng ARP gửi liên tục
+  * sau đó layer 3/7 của victim (HTTP/DNS) đi unicast tới MAC của attacker
 
-**Kiến thức căn bản về ARP Poisoning:** Trò này thường xảy ra khi attacker nhồi các gói ARP reply giả mạo để lừa máy nạn nhân (hoặc gateway) ánh xạ IP của gateway/nạn nhân vào địa chỉ MAC của attacker. Điều này làm rối loạn ARP table của nạn nhân, dọn đường cho kịch bản Man-In-The-Middle (MitM) hoàn hảo.
+  ![](/assets/images/htb/cafepoisoning/c2b8fb59-7a25-41ad-a3bb-28cb3ec70323.png " =1882x636")
+* IP 192.168.1.43 có ánh xạ chuẩn ban đầu: 192.168.1.43 is-at 1c:bf:ce:d9:b2:db lúc 21:07:07.
+* Sau đó xuất hiện ARP reply giả từ 08:00:27:9b:8b:bd tự nhận "192.168.1.43 is-at 08:00:27:9b:8b:bd"
 
-Dấu hiệu nhận biết đặc trưng trên Wireshark:
-- Xuất hiện cùng 1 IP nhưng nhảy múa qua 2 MAC address khác nhau trong gói ARP reply (opcode 2).
-- Mật độ văng ARP cực kỳ dày và liên tục.
-- Ngay sau đó, traffic ở Layer 3/7 (như HTTP/DNS) của victim bỗng dưng đi unicast thẳng vào mồm cái MAC của attacker.
+  => Attacker giả IP 192.168.1.43 bằng MAC 08:00:27:9b:8b:bd, khác với MAC hợp lệ 1c:bf:ce:d9:b2:db, và mốc thời gian đầu tiên của event này là 2025-03-10 21:07:33
 
-![ARP Poisoning Detected](/assets/images/htb/cafepoisoning/c2b8fb59-7a25-41ad-a3bb-28cb3ec70323.png)
-
-Nhìn lại mạng: Target IP `192.168.1.43` có ánh xạ chuẩn ban đầu là `192.168.1.43 is-at 1c:bf:ce:d9:b2:db` lúc `21:07:07`.
-Tuy nhiên sau đó, bất thình lình lòi ra dải ARP reply thối từ MAC `08:00:27:9b:8b:bd` tự nhận danh xưng `"192.168.1.43 is-at 08:00:27:9b:8b:bd"`.
-
-Rõ ràng attacker đang tráo hàng IP `192.168.1.43` bằng cái MAC bá dơ `08:00:27:9b:8b:bd`. Mốc thời gian sớm nhất khứa này tung skill là `2025-03-10 21:07:33`.
-
-```
+```none
 2025-03-10 21:07:33
 ```
 
-### 3. Tóm cổ địa chỉ MAC của Attacker
+### 3. **What MAC address did the attacker use during the ARP poisoning attack?**
 
-> What MAC address did the attacker use during the ARP poisoning attack?
+* Từ câu 2, MAC address mà attacker dung để thực hiện ARP poisoning là 08:00:27:9b:8b:bd
 
-Phân tích thẳng tay từ câu 2, địa chỉ MAC giả mạo kẻ thủ ác dùng làm mồi nhử trong quá trình ARP poisoning là:
-
-```
+```none
 08:00:27:9b:8b:bd
 ```
 
-### 4. Truy vết IP Nạn nhân (Target IP)
+### 4. **What is the IP address targeted by the attacker?**
 
-> What is the IP address targeted by the attacker?
+* Từ câu 2, để ý trường target IP sẽ thấy được target IP là `192.168.1.90`
 
-Lê bước theo file packet ở câu 2, để ý dòm vào trường `Target IP` bên trong luồng ARP tà đạo, nạn nhân xấu số bị rải bùa chính là `192.168.1.90`.
+  ![](/assets/images/htb/cafepoisoning/dc618abb-29c7-4000-97e8-b86b78065660.png " =860x227")
 
-![Target IP Details](/assets/images/htb/cafepoisoning/dc618abb-29c7-4000-97e8-b86b78065660.png)
-
-```
+```none
 192.168.1.90
 ```
 
-### 5. Lật mặt domain giả (Spoofed Domain)
+### 5. **Which spoofed domain was accessed by the compromised user?**
 
-> Which spoofed domain was accessed by the compromised user?
+* Từ package của câu 2 cũng sẽ thấy domain mà attacker dùng là `devx-corp.net`
+* Phân tích luồng package cũng sẽ thấy Reply của 192.168.1.90 tới domain này
 
-Lội tiếp theo cái luồng packet poison ở câu số 2, rình xem sau khi cướp đường thì attacker điều traffic đi đâu, lòi ra domain mà attacker mang ra mồi nạn nhân là `devx-corp.net`. 
-Bám sát traffic, rành rành ra các luồng Reply của `192.168.1.90` (máy victim) trỏ thẳng về cái domain ất ơ này.
+  ![](/assets/images/htb/cafepoisoning/46e02542-16b7-40f7-a18c-dd887cf6399f.png " =609x178")
 
-![Spoofed Domain Traffic](/assets/images/htb/cafepoisoning/46e02542-16b7-40f7-a18c-dd887cf6399f.png)
-
-```
+```none
 devx-corp.net
 ```
 
-### 6. Tìm lại Địa chỉ Legitimate IP thực lòng lúc đầu
+### 6. **What was the legitimate IP address accessed by the compromised user before the DNS spoofing occurred?**
 
-> What was the legitimate IP address accessed by the compromised user before the DNS spoofing occurred?
+* Trong file pcap, các ip address đều k đúng đáp án, tuy nhiên nếu mò vào trong folder Triage, challange sẽ cho chúng ta các artifact về Google Chrome
 
-Ngâm file pcap hoài vẫn không cạy mồm được IP thật, vì traffic đã bị đánh tráo toàn cục. Dạt sang phương án B, nhảy vào thư mục `Triage` đào bới xem có lòi ra artifact gì khô khan không. Quả nhiên chộp được đống dữ liệu vọc vạch của Google Chrome.
+  ![](/assets/images/htb/cafepoisoning/b00b23ea-66e8-4cb6-8c02-475458c3a169.png " =1304x308")
+* Các file log của Chrome được viết dưới dạng sqlite database, sau khi research google ta tìm ra được 1 tool dùng để forensic cache của Google là ChromeCacheView
+* Filter theo domain được attacker giả mạo là devx-corp.net ta sẽ thấy legitimate IPcủa domain này (137.50.21.6) và IP mà attacker giả mạo (192.168.1.11)
 
-![Google Chrome Artifacts](/assets/images/htb/cafepoisoning/b00b23ea-66e8-4cb6-8c02-475458c3a169.png)
+  ![](/assets/images/htb/cafepoisoning/6acddd23-77c5-4f10-bddf-e0d43c4366f9.png " =1880x740")
 
-Bản chất mấy ruột log của Chrome viết thuần trên database dạng `sqlite`. Gõ vài từ khóa kéo về được món hàng chuyên dụng để nhai đồ cache trình duyệt: `ChromeCacheView`.
-Lôi tool ra xài, móc filter dò thẳng cái domain ngụy tạo `devx-corp.net`. Bùm! Truy xuất được hai vệt IP:
-- Legitimate IP (IP chuẩn chỉnh): `137.50.21.6`
-- Spoofed IP (IP mà mị lừa): `192.168.1.11`
-
-![Chrome Cache Analysis](/assets/images/htb/cafepoisoning/6acddd23-77c5-4f10-bddf-e0d43c4366f9.png)
-
-```
+```none
 137.50.21.6
 ```
 
-### 7. Khui SSID Wifi và thuật toán mã hoá
+### 7. **Identify the Wi-Fi network name (SSID) and the authentication algorithm used by the compromised user's connection.**
 
-> Identify the Wi-Fi network name (SSID) and the authentication algorithm used by the compromised user's connection.
+* Access vào folder chứa windows event log của Triage tại `C:\Windows\System32\winevt\logs`, ta sẽ thấy file Wlan-Autoconfig, đây là nơi chứa các log operation của wifi trong hđh Windows
 
-Luồn lách vào mảng thư mục chứa Windows Event Log trong nhánh Triage tại `C:\Windows\System32\winevt\logs`, mò tìm trúng file `Wlan-Autoconfig`. Đây là hang ổ chứa mọi bí mật về hành vi log wifi của hạ tầng Windows.
+  
+:::info
+  <https://www.dell.com/support/kbdoc/en-us/000150790/using-windows-logs-to-troubleshoot-wireless-issues-only-seen-at-customer-locations>
 
-> [!TIP]
-> Ae có thể tham khảo mẹo dùng log Windows để mổ network [tại đây](https://www.dell.com/support/kbdoc/en-us/000150790/using-windows-logs-to-troubleshoot-wireless-issues-only-seen-at-customer-locations).
+  :::
+* Tại event 8001 ta sẽ thấy full các thông tin về SSID
 
-Focus ngay vào Event ID `8001`, nó trút ra cặn kẽ mọi thông tin ẩn số về SSID.
+  ![](/assets/images/htb/cafepoisoning/9283e5bd-9df3-445a-8b7b-bffc3b9500e3.png " =442x267")
 
-![SSID Authentication Event](/assets/images/htb/cafepoisoning/9283e5bd-9df3-445a-8b7b-bffc3b9500e3.png)
-
-```
+```none
 Cuppa Ce:WPA2-Personal
 ```
 
-### 8. Link tải file độc hại (Malicious Executable)
+### 8. **Identify the download link used to fetch the malicious executable.**
 
-> Identify the download link used to fetch the malicious executable.
+* \
 
-Trong bọc pcap, rà soát lại lưu lượng HTTP móc trúng đường dẫn download cái cục nợ executable kia:
-
-```
+```none
 192.168.1.11:5078
 ```
 
-### 9. Soi C2 Server hoạt động
+### **9. Identify the IP address and port number of the Command-and-Control (C2) server.**
 
-> Identify the IP address and port number of the Command-and-Control (C2) server.
+\n
 
-Áp dụng chiêu tương tự, tra xét vạt outbound connection hướng thẳng ra ngoài:
-
-```
+```none
 s1rx-update.xyz
 ```
 
-### 10. Check domain C2 Server
+### 10. **The malicious executable is designed to check the C2 server before connecting. Provide the domain name of the C2 server.**
 
-> The malicious executable is designed to check the C2 server before connecting. Provide the domain name of the C2 server.
+\n
 
-Domain chết chóc bị ngòi cho phép thực thi:
-
-```
+```none
 s1rx-update.xyz
 ```
 
-### 11. Hàm Win32 API nhúng quyền hắc ám
+### 11. **The malicious executable verifies privileges before execution to ensure it runs as administrator. Which Win32 API function is used for this check?**
 
-> The malicious executable verifies privileges before execution to ensure it runs as administrator. Which Win32 API function is used for this check?
 
-Từ kết quả đảo qua IDA/binaries (hoặc log rò rỉ), hành vi cắm sừng check quyền Local Admin ăn vào hàm cốt lõi Win32 sau:
-
-```
+```none
 CheckTokenMembership()
 ```
 
-### 12. Triệt hạ hàng thủ Windows Defender
+### 12. **Which command was executed by the attacker to disable Windows Defender?**
 
-> Which command was executed by the attacker to disable Windows Defender?
+* c
+* c
 
-Kẻ tấn công không ngần ngại nhét trực diện lệnh bypass vào Powershell, với mảng ruột như sau:
-
-```powershell
+  ```none
   if ($PSBoundParameters.ContainsKey('DisableRealtimeMonitoring')) {
             [object]$__cmdletization_value = ${DisableRealtimeMonitoring}
-            ...
-```
+            $__cmdletization_methodParameter = [Microsoft.PowerShell.Cmdletization.MethodParameter]@{Name = 'DisableRealtimeMonitoring'; ParameterType = 'System.Boolean'; Bindings = 'In'; Value = $__cmdletization_value; IsValuePresent = $true}
+          } else {
+            $__cmdletization_methodParameter = [Microsoft.PowerShell.Cmdletization.MethodParameter]@{Name = 'DisableRealtimeMonitoring'; ParameterType = 'System.Boolean'; Bindings = 'In'; Value = $__cmdletization_defaultValue; IsValuePresent = $__cmdletization_defaultValueIsPresent}
+          }
+          $__cmdletization_methodParameters.Add($__cmdletization_methodParameter)
+  ```
+* c
 
-Nhào ra lệnh hoàn chỉnh nã gục Defender:
-
-```powershell
+```none
 Set-MpPreference -DisableRealtimeMonitoring $true -Verbose
 ```
 
-### 13. Cơ chế Nằm Vùng (Persistence)
+### 13. **A persistence mechanism was created by the attacker. Provide the registry key used for persistence.**
 
-> A persistence mechanism was created by the attacker. Provide the registry key used for persistence.
 
-Xọc vào đường Registry để tự động tái khởi động ăn nhờ ở đậu, mục tiêu của nó là:
-
-```
+```none
 HKCU\Control Panel\Desktop
 ```
 
-![Persistence Registry](/assets/images/htb/cafepoisoning/c2fdecf2-fb91-4aca-ad8b-716ef0a9270f.png)
+\n ![](/assets/images/htb/cafepoisoning/c2fdecf2-fb91-4aca-ad8b-716ef0a9270f.png " =698x639")
