@@ -113,81 +113,18 @@
               </li>
 
               <li class="tree-node tree-node-branch">
-                <details class="tree-group" open>
-                  <summary class="tree-branch-label tree-branch-label-sub">
-                    <span class="tree-branch-link">SOC Operations</span>
-                  </summary>
-                  <ul class="tree-children">
-                    {% for post in site.posts %}
-                      {% if post.category == "soc" %}
-                        <li class="tree-node">
-                          <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-                        </li>
-                      {% endif %}
-                    {% endfor %}
-                  </ul>
-                </details>
-              </li>
-
-              <li class="tree-node tree-node-branch">
                 <details class="tree-group">
                   <summary class="tree-branch-label tree-branch-label-sub">
-                    <span class="tree-branch-link">Incident Response</span>
+                    <span class="tree-branch-link">Others</span>
                   </summary>
                   <ul class="tree-children">
                     {% for post in site.posts %}
-                      {% if post.category == "incident-response" %}
-                        <li class="tree-node">
-                          <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-                        </li>
+                      {% assign is_platform = false %}
+                      {% if post.ctf contains "CyberDefenders" or post.ctf contains "Blue Team Labs Online" or post.ctf contains "Hack The Box" or post.ctf contains "HTB" %}
+                        {% assign is_platform = true %}
                       {% endif %}
-                    {% endfor %}
-                  </ul>
-                </details>
-              </li>
-
-              <li class="tree-node tree-node-branch">
-                <details class="tree-group">
-                  <summary class="tree-branch-label tree-branch-label-sub">
-                    <span class="tree-branch-link">Threat Hunting</span>
-                  </summary>
-                  <ul class="tree-children">
-                    {% for post in site.posts %}
-                      {% if post.category == "threat-hunting" %}
-                        <li class="tree-node">
-                          <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-                        </li>
-                      {% endif %}
-                    {% endfor %}
-                  </ul>
-                </details>
-              </li>
-
-              <li class="tree-node tree-node-branch">
-                <details class="tree-group">
-                  <summary class="tree-branch-label tree-branch-label-sub">
-                    <span class="tree-branch-link">Malware Analysis</span>
-                  </summary>
-                  <ul class="tree-children">
-                    {% for post in site.posts %}
-                      {% if post.category == "malware" %}
-                        <li class="tree-node">
-                          <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-                        </li>
-                      {% endif %}
-                    {% endfor %}
-                  </ul>
-                </details>
-              </li>
-
-              <li class="tree-node tree-node-branch">
-                <details class="tree-group" open>
-                  <summary class="tree-branch-label tree-branch-label-sub">
-                    <span class="tree-branch-link">DFIR</span>
-                  </summary>
-                  <ul class="tree-children">
-                    {% for post in site.posts %}
-                      {% if post.category == "dfir" or post.category == "forensics" %}
+                      
+                      {% if is_platform == false %}
                         <li class="tree-node">
                           <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
                         </li>
