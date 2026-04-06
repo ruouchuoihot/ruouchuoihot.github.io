@@ -98,7 +98,7 @@ Case này là một ví dụ điển hình về Web Compromise Workflow:
 4. Sử dụng credential thu được để đăng nhập admin.
 5. Upload web shell để duy trì quyền truy cập (persistence).
 
-## Ma trận đáp án (Answer Matrix)
+## Answer
 
 - Attacker IP: `111.224.250.131`
 - City: `Shijiazhuang`

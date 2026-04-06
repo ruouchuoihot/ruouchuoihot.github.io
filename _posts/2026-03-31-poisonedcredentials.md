@@ -76,7 +76,7 @@ Nước đi hoàn hảo từ lúc poison name resolution cho tới lúc lấy đ
 - Tìm kiếm (Hunt) các outbound SMB session ngay sau những cú poisoned resolution traffic.
 - Soi các failed authentication attempts liên tục đằng sau mớ multicast name queries.
 
-## Ma trận đáp án (Answer Matrix)
+## Answer
 
 - Mistyped query: `fileshaare`
 - Rogue IP: `192.168.232.215`
