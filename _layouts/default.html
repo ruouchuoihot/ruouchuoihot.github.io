@@ -119,15 +119,17 @@
                   </summary>
                   <ul class="tree-children">
                     {% for post in site.posts %}
-                      {% assign is_platform = false %}
-                      {% if post.ctf contains "CyberDefenders" or post.ctf contains "Blue Team Labs Online" or post.ctf contains "Hack The Box" or post.ctf contains "HTB" %}
-                        {% assign is_platform = true %}
-                      {% endif %}
-                      
-                      {% if is_platform == false %}
-                        <li class="tree-node">
-                          <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
-                        </li>
+                      {% if post.ctf %}
+                        {% assign is_platform = false %}
+                        {% if post.ctf contains "CyberDefenders" or post.ctf contains "Blue Team Labs Online" or post.ctf contains "Hack The Box" or post.ctf contains "HTB" %}
+                          {% assign is_platform = true %}
+                        {% endif %}
+                        
+                        {% if is_platform == false %}
+                          <li class="tree-node">
+                            <a class="tree-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                          </li>
+                        {% endif %}
                       {% endif %}
                     {% endfor %}
                   </ul>
