@@ -1097,6 +1097,7 @@ img {
   padding: 0.3rem 0.55rem;
   border-radius: 6px;
   color: var(--text-secondary);
+  transition: var(--transition);
 }
 
 .tree-link:hover,
@@ -1104,6 +1105,7 @@ img {
   background: rgba(0, 255, 136, 0.08);
   color: var(--text-primary);
   text-shadow: none;
+  transform: translateX(4px);
 }
 
 .tree-branch-link {
@@ -1158,6 +1160,7 @@ img {
   line-height: 1;
   background: rgba(15, 23, 42, 0.55);
   flex: 0 0 auto;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tree-group[open] > .tree-branch-label::before {
@@ -1224,11 +1227,13 @@ img {
   border-radius: 2px;
   flex: 0 0 auto;
   background: rgba(148, 163, 184, 0.04);
+  transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .tree-children .tree-link:hover::before {
   border-color: rgba(0, 255, 136, 0.55);
   background: rgba(0, 255, 136, 0.12);
+  transform: rotate(90deg) scale(1.2);
 }
 
 @media (max-width: 900px) {
