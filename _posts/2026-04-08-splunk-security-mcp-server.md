@@ -276,14 +276,34 @@ Một số điểm kỹ thuật đáng lưu ý trong quá trình phát triển:
 - **Export vs Oneshot**: Oneshot blocking phù hợp cho query nhỏ, export streaming phù hợp cho dataset lớn. Cả hai đều qua risk check trước khi thực thi.
 - **Audit trail**: Mọi thao tác đều được ghi log qua hàm `audit()`. Kết hợp với `get_query_history`, ta có thể trace lại chính xác những gì AI đã làm trên Splunk.
 
+## Behavioral Threat Hunting (Truy vết hành vi)
+
+Chiến thuật phòng thủ hiện đại yêu cầu vượt qua mức phát hiện bằng signature (chữ ký). Sức mạnh thực sự của MCP Server nằm ở **Behavioral Threat Hunting**, giúp Analyst không cần phải tự chắp vá các event log bị phân mảnh. 
+
+Dưới đây là một demo thực tế khi AI xử lý một cuộc tấn công mô phỏng bằng Atomic Red Team:
+
+### 1. Phát hiện dấu hiệu bất thường (Anomaly Discovery)
+Thông qua công cụ `hunt_anomalies`, AI có thể tự rà quét và highlight các chuỗi thực thi mờ ám, ví dụ như PowerShell encode, LolBin hay web shell.
+
+![](/assets/images/Pasted%20image%2020260408134615.png)
+
+### 2. Dựng lại dòng sự kiện (Host Timeline)
+Thay vì search từng EventID rời rạc, AI dùng `get_host_timeline` để ghép nối liên tiếp các bản ghi về đăng nhập, tạo tiến trình (process creation), mạng lưới và file system tạo thành một bức tranh toàn cảnh (storyline) của kẻ tấn công trên một endpoint.
+
+![](/assets/images/Pasted%20image%2020260408134659.png)
+
+### 3. Xây dựng Alert Rule (Alert Generation)
+Sau khi triệt phá chuỗi tấn công và phát hiện các dấu hiệu nhận diện đặc trưng, AI sẽ hỗ trợ tự động xây dựng Splunk Search Query dưới dạng một Alert Rule hoàn chỉnh. Rule này đồng thời được áp các mã MITRE ATT&CK tương ứng để SOC có thể triển khai giám sát ngay lập tức.
+
+![](/assets/images/Pasted%20image%2020260408140900.png)
+![](/assets/images/Pasted%20image%2020260408140929.png)
+![](/assets/images/Pasted%20image%2020260408140943.png)
 ## Kết luận
 
 MCP Server này giải quyết hai bài toán chính:
 
 1. **Tăng tốc workflow**: SOC analyst không cần viết SPL thủ công cho các tác vụ lặp lại. Nói "kiểm tra brute force trong 24h qua" — AI tự build query và chạy.
 2. **An toàn**: Risk scoring engine + sensitive data masking đảm bảo AI không vô tình phá hoại hoặc lộ thông tin nhạy cảm.
-
-
 
 Với 20+ tools tích hợp sẵn, catalog 26 MITRE ATT&CK techniques, và 3 guided prompts, server này hoạt động như một **SOC co-pilot** — không thay thế analyst nhưng giảm đáng kể thời gian thao tác manual.
 
